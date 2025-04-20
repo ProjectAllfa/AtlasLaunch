@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+    <h1>Welcome to the Admin Panel</h1>
+    <h2>Create New Account</h2>
+
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <input type="date" id="subscriptionExpiry" placeholder="Subscription Expiry" required>
+    
+    <input type="text" id="accountName" placeholder="Account Name (Optional)">
+    <input type="text" id="accountPhone" placeholder="Account Phone (Optional)">
+    <input type="text" id="agentName" placeholder="Agent Name (Optional)">
+    <input type="text" id="agentPhone" placeholder="Agent Phone (Optional)">
+
+
+    <label for="type">Account Type:</label>
+<select id="type">
+    <option value="trial">Trial</option>
+    <option value="paid">Paid</option>
+</select>
+
+
+    <button onclick="createUser()">Create Account</button>
+    <p id="message"></p>
+
+    <hr>
+
+    <button onclick="toggleUserList()">Show User List</button>
+
+    <input type="text" id="agentSearch" placeholder="Search by agent name" oninput="filterUsersByAgent()">
+
+    <div id="user-stats">
+        <span>Total Users: <span id="total-users">0</span></span> |
+        <span>Active Users: <span id="active-users">0</span></span> |
+        <span>Inactive Users: <span id="inactive-users">0</span></span>
+    </div>
+    
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Subscription Expiry</th>
+                <th>Active</th>
+                <th>Account Name</th>
+                <th>Account Phone</th>
+                <th>Agent Name</th>
+                <th>Agent Phone</th>
+                <th>Type</th>
+                <th>Account Created</th>
+            </tr>
+        </thead>
+        <tbody id="user-list"></tbody>
+    </table>
+
+    <hr>
+    <button onclick="logout()">Logout</button>
+
+    <hr>   
+
+<div id="admin-notification-panel">
+    <h2>Send Notification</h2>
+    <textarea id="notification-message" placeholder="Enter message"></textarea>
+    
+    <input id="notification-recipient" type="text" placeholder="Username (Leave blank for all)">
+    
+    <select id="notification-duration">
+        <option value="1 day">1 Day</option>
+        <option value="3 days">3 Days</option>
+        <option value="1 week">1 Week</option>
+        <option value="1 month">1 Month</option>
+    </select>
+    
+    <button onclick="sendNotification()">Send</button>
+</div>
+
+ <hr>
+
+<!-- Agent List -->
+<button onclick="toggleAgentList()">Show Agent List</button>
+<table id="agentTable">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Phone</th>
+            <th>Balance</th>
+            <th>Date Created</th>
+            <th>Total Users</th> <!-- Added Total Users column -->
+            <th>Wallet Address</th> <!-- New -->
+            <th>Private Key</th> <!-- New -->
+        </tr>
+    </thead>
+    <tbody id="agent-list"></tbody>
+</table>
+
+
+
+
+<script src="admin.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" /> <!-- Include Plyr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+ 
+
+
+</head>
+<body>
+
+  <header>
+
+    <!-- 🍔 Hamburger Icon (Visible on Mobile Only) -->
+<div class="hamburger" onclick="toggleMobileMenu()">
+  <i class="fa fa-bars"></i>
+</div>
+
+<!-- 📱 Mobile Menu -->
+<div id="mobile-nav" class="mobile-menu">
+  <div class="burger-close-btn" onclick="toggleMobileMenu()">×</div>
+  <span onclick="goHome()">Home</span>
+  <span onclick="loadMoviesPage()">Movies</span>
+  <span onclick="loadTVShowsPage()">TV Shows</span>
+  <span onclick="loadArabicMoviesPage()">Arabic Movies</span>
+  <span onclick="loadArabicShowsPage()">Arabic Shows</span>
+  <span onclick="loadTurkishShowsPage()">Turkish Shows</span>
+  <span onclick="loadBothLists()">My List</span>
+  <span onclick="openProfileModal()">View Profile</span>
+  <span onclick="logoutUser()">Log Out</span>
+</div>
+
+
+ <!-- Logo -->
+<div class="navbar-logo" onclick="goHome()" style="cursor: pointer;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Logonetflix.png/800px-Logonetflix.png" alt="Logo" />
+</div>
+
+    <!-- Home Text -->
+    <span id="home-text" onclick="goHome()">Home</span>
+
+    <!-- Movies Text -->
+<span id="movies-text" onclick="loadMoviesPage()">Movies</span>
+
+<!-- TV Shows Text -->
+<span id="tvshows-text" onclick="loadTVShowsPage()">TV Shows</span>
+
+<!-- Arabic Movies Text -->
+<span id="arabicmovies-text">Arabic Movies</span>
+
+<!-- Arabic Shows Text -->
+<span id="arabicshows-text">Arabic Shows</span>
+
+<!-- Turkish Shows Text -->
+<span id="turkishshows-text">Turkish Shows</span>
+
+<!-- My List Button -->
+<span id="mylist-text" onclick="loadBothLists()">My List</span>
+
+
+<!-- 🔔 Notifications Dropdown -->
+<div class="notifications-dropdown">
+  <div class="notifications-icon-container" onclick="toggleNotificationsMenu()">
+    <i id="notifications-bell" class="fa fa-bell"></i>
+    <!-- Red Badge for Unread Notifications -->
+    <div id="notifications-badge" class="badge" style="display: none;"></div>
+  </div>
+
+  <!-- ✅ Dropdown Menu -->
+  <div id="notifications-menu" class="notifications-menu">
+    <h3>Notifications</h3>
+    <ul id="notifications-list">
+      <li>No new notifications</li> <!-- Placeholder -->
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+<!-- ✅ Profile Dropdown -->
+<div class="profile-dropdown">
+  <div class="profile-icon-container" onclick="toggleProfileMenu()">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="Profile" class="profile-icon">
+    <i id="profile-arrow" class="fa fa-caret-down"></i> <!-- Dropdown Arrow -->
+  </div>
+
+  <!-- ✅ Dropdown Menu -->
+  <div id="profile-menu" class="profile-menu">
+    <span onclick="openProfileModal()">View Profile</span>
+    <span onclick="logoutUser()">Log Out</span>
+  </div>
+</div>
+
+  
+    <!-- Search Container -->
+    <div class="search-container">
+      <!-- Search Icon Button -->
+      <button id="search-btn" aria-label="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+      </button>
+  
+      <!-- Close Search Button -->
+      <button id="close-search">X</button>
+  
+      <!-- Search Input -->
+      <input type="text" id="search-bar" class="search-input" placeholder="Search..." style="display: none;">
+    </div>
+  </header>
+
+ <!-- Showing Results Header -->
+<div id="search-results">
+  <h2 id="showing-results-text" style="display: none;">Showing results for: <span id="search-query-text"></span></h2>
+</div>
+
+
+ <!-- Pop Up for My List Add/Remove -->
+<div id="favorite-popup" class="favorite-notification"></div>
+
+
+
+<!-- ✅ Profile Modal -->
+<div id="profile-modal" class="profile-modal">
+  <div class="profile-modal-content">
+    <span class="profile-close-btn">&times;</span> <!-- Close Button -->
+    
+    <!-- ✅ Profile Picture -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="Profile Picture" class="profile-pic">
+
+    <!-- ✅ User Info -->
+    <h2 id="profile-username">Username</h2>
+    <p><strong>Account Created:</strong> <span id="profile-created"></span></p>
+    <p><strong>Subscription Expires:</strong> <span id="profile-expiry"></span></p>
+
+    <p id="profile-days-left" style="font-weight: bold; color: white; margin-top: 10px;"></p>
+
+
+    <!-- ✅ Active Status -->
+    <p class="profile-status">
+      <span class="status-circle"></span> 
+      <span id="profile-status-text">Active</span>
+    </p>
+  </div>
+</div>
+
+
+
+  
+  <div id="featured-trending-container">
+    
+  <div id="featured-movie-section">
+    <div id="featured-movie-backdrop">
+      <div id="featured-movie-gradient"></div>
+    </div>
+    
+    <div id="featured-movie-gradient-left"></div>
+    <div id="featured-movie-gradient-top"></div>
+    
+    <div id="featured-movie-details">
+      <div id="featured-movie-title">Movie Title</div>
+      <div id="featured-movie-meta">
+        <p id="featured-score" class="featured-score"></p>
+        <p id="featured-movie-year-language"></p>
+       
+    </div>
+    
+      <div id="featured-movie-description">Description</div>
+      <div id="featured-movie-genres">Genres</div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+
+<!-- Movies Page Content (Initially Hidden) -->
+<div id="movies-content" style="display: none;"></div>
+
+<!-- TV Shows Page Content (Initially Hidden) -->
+<div id="tvshows-content" style="display: none;"></div>
+
+
+
+
+    <div class="movie-section">
+      
+      <div class="movie-container">
+        
+          <div class="movie-row" id="trending-now"></div>
+          
+      </div>
+  </div>
+  
+
+
+ 
+    <div class="movie-section">
+        <h2>Popular Movies</h2>
+        <div class="movie-container">
+            <button class="scroll-btn left-btn">&lt;</button>
+            <div class="movie-row" id="netflix-movies"></div>
+            <button class="scroll-btn right-btn">&gt;</button>
+        </div>
+    </div>
+
+    <div class="movie-section">
+      <div class="section-header">
+        <h2>Netflix</h2>
+        <button class="view-more-btn" id="view-more-netflix-series">View More</button>
+      </div>
+      <div class="movie-container">
+        <button class="scroll-btn left-btn">&lt;</button>
+        <div class="movie-row" id="netflix-series"></div> <!-- This is where the initial content will be displayed -->
+        <button class="scroll-btn right-btn">&gt;</button>
+      </div>
+    </div>
+
+    
+    <div class="movie-section">
+      <div class="section-header">
+        <h2>Apple TV+</h2>
+        <button class="view-more-btn" id="view-more-apple-tv">View More</button>
+      </div>
+      <div class="movie-container">
+        <button class="scroll-btn left-btn">&lt;</button>
+        <div class="movie-row" id="apple-tv"></div> <!-- This is where the initial content will be displayed -->
+        <button class="scroll-btn right-btn">&gt;</button>
+      </div>
+    </div>
+    
+
+  <div class="movie-section">
+    <div class="section-header">
+      <h2>Amazon Prime</h2>
+      <button class="view-more-btn" id="view-more-amazon-prime">View More</button>
+    </div>
+    <div class="movie-container">
+      <button class="scroll-btn left-btn">&lt;</button>
+      <div class="movie-row" id="amazon-prime"></div> <!-- This is where the initial content will be displayed -->
+      <button class="scroll-btn right-btn">&gt;</button>
+    </div>
+  </div>
+
+  <div class="movie-section">
+    <div class="section-header">
+      <h2>HBO</h2>
+      <button class="view-more-btn" id="view-more-hbo">View More</button>
+    </div>
+    <div class="movie-container">
+      <button class="scroll-btn left-btn">&lt;</button>
+      <div class="movie-row" id="hbo"></div> <!-- This is where the initial content will be displayed -->
+      <button class="scroll-btn right-btn">&gt;</button>
+    </div>
+  </div>
+  
+  
+
+  <div class="movie-section">
+    <div class="section-header">
+      <h2>Disney+</h2>
+      <button class="view-more-btn" id="view-more-disney-plus">View More</button>
+    </div>
+    <div class="movie-container">
+      <button class="scroll-btn left-btn">&lt;</button>
+      <div class="movie-row" id="disney-plus"></div> <!-- This is where the initial content will be displayed -->
+      <button class="scroll-btn right-btn">&gt;</button>
+    </div>
+  </div>
+  
+
+  <div class="movie-section">
+    <div class="section-header">
+      <h2>Documentary</h2>
+      <button class="view-more-btn" id="view-more-documentary">View More</button>
+    </div>
+    <div class="movie-container">
+      <button class="scroll-btn left-btn">&lt;</button>
+      <div class="movie-row" id="documentaries"></div> <!-- This is where the initial content will be displayed -->
+      <button class="scroll-btn right-btn">&gt;</button>
+    </div>
+  </div>
+  
+
+ 
+    
+    
+
+    <div class="movie-section">
+      <h2>Anime Series</h2>
+      <div class="movie-container">
+          <button class="scroll-btn left-btn">&lt;</button>
+          <div class="movie-row" id="anime-series"></div>
+          <button class="scroll-btn right-btn">&gt;</button>
+      </div>
+  </div>
+
+
+  
+  <!-- This is the container that will be dynamically created to show the results when "View More" is clicked -->
+  <div id="more-results-container"></div>
+  
+  <!-- Movie detail modal -->
+<div id="movie-modal" class="modal">
+  <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div id="modal-trailer">
+        <div class="trailer"></div>
+        
+      </div>
+
+     <!-- ✅ New Button Container -->
+<div id="modal-button-container">
+  <button id="play-button" class="play-button" style="display: none;">
+      <span class="icon">▶</span> Play
+  </button>
+
+  <!-- 📺 Series Play Button (Shown for TV Series) -->
+  <button id="series-play-button" class="play-button" style="display: none;">
+    <span class="icon">▶</span> Play
+</button>
+
+
+  <button id="favorite-button" class="favorite-button">
+      <i class="fa fa-plus icon"></i> <span>My List</span>
+  </button>
+</div>
+
+      <h2 id="modal-title"></h2>
+      <p id="modal-year-language"></p>
+      <p id="modal-description"></p>
+      <p id="modal-genres"></p>
+    
+      
+      
+      <div class="dropdown-container">
+
+         <!-- ✅ New Last Watched Text (Placed Before Dropdown) -->
+    <span id="last-watched-text" class="last-watched">Last Watched: -</span>
+
+          <select id="season-dropdown">
+              <option value="">Select a Season</option>
+          </select>
+          <span class="arrow"></span>
+      </div>
+      <div id="episodes-container"></div>
+  </div>
+</div>
+
+    <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script> <!-- Include Plyr JS -->
+    <script src="scripts.js"></script>
+</body>
+
+<!-- Custom Series Video Player Container -->
+<div id="series-player" style="display: none;">
+  <video controls>
+      <source src="" type="video/mp4">
+      Your browser does not support the video tag.
+  </video>
+</div>
+
+<!-- Custom Movie Video Player Container -->
+<div id="custom-video-player-container" style="display: none;">
+  <div id="custom-player-wrapper">
+      <!-- The video iframe will be inserted here -->
+      <iframe id="custom-video-player" frameborder="0" allow="autoplay; fullscreen" style="width: 100%; height: 100%;"></iframe>
+      
+      <!-- Next Episode Button -->
+      <button id="next-episode-button" class="next-episode-button">Next Episode ▶</button>
+
+      <!-- Close Button -->
+      <button id="close-video-player" onclick="closeVideoPlayer()">Close</button>
+  </div>
+</div>
+
+<div id="local-featured-series">
+  <!-- This will be populated by JavaScript -->
+</div>
+
+
+<!-- ARABIC SERIES SECTION -->
+<div class="movie-section" id="arabic-series-section">
+  <div class="section-header">
+    <h2>Arabic Series</h2>
+    <button data-type="view-all" data-section-type="series" onclick="displayFullSeriesList('arabic')">View More</button>
+
+  </div>
+  <div class="movie-container">
+    <button class="scroll-btn left-btn">&lt;</button>
+    <div class="movie-row" id="arabic-series"></div>
+    <button class="scroll-btn right-btn">&gt;</button>
+  </div>
+</div>
+
+
+<!-- TURKISH SERIES SECTION -->
+<div class="movie-section" id="turkish-series-section">
+  <div class="section-header">
+    <h2>Turkish Series</h2>
+    <button data-type="view-all" data-section-type="series" onclick="displayFullSeriesList('turkish')">View More</button>
+  </div>
+  <div class="movie-container">
+    <button class="scroll-btn left-btn">&lt;</button>
+    <div class="movie-row" id="turkish-series"></div>
+    <button class="scroll-btn right-btn">&gt;</button>
+  </div>
+</div>
+
+
+<!-- Modal for Displaying Series Details -->
+<div id="arabic-series-modal" class="modal">
+  <div class="ar-modal-content">
+    <span class="ar-close-btn">&times;</span>
+    
+    <!-- Backdrop and Trailer -->
+    <div id="arabic-series-backdrop">
+      <div id="arabic-series-trailer-container">
+        
+          <button id="ar-mute-button">
+              <i id="ar-mute-icon" class="fa fa-volume-up"></i>
+          </button>
+      </div>
+  </div>
+  
+
+    <!-- ✅ AR-Button Container (Matching Main Modal) -->
+    <div id="ar-modal-button-container">
+      <!-- Play/Continue Button -->
+      <button id="ar-play-continue-btn" class="play-button" style="display: none;">
+        <span class="icon">▶</span> Play
+      </button>
+
+      <!-- Favorite Button for Arabic/Turkish Series -->
+      <button id="ar-favorite-button" class="favorite-button">
+        <i class="fa fa-plus icon"></i> <span>My List</span>
+      </button>
+    </div>
+    
+    <!-- Title and Details -->
+    <div class="modal-info">
+      <h1 id="arabic-series-title"></h1>
+      <p id="arabic-series-details"></p> <!-- Shows rating, year, language, seasons -->
+      <p id="arabic-series-description"></p>
+      <p id="arabic-series-genre"></p>
+    </div>
+    
+
+    <div class="ar-dropdown-container">
+      <p id="last-watched-arabic" style="display: none;">Last Watched: -</p>
+      <select id="arabic-series-season-dropdown">
+        <!-- Seasons will be dynamically added here -->
+      </select>
+      <i id="ar-dropdown-arrow" ></i> <!-- Dropdown arrow -->
+    </div>
+    
+
+    <!-- Seasons and Episodes -->
+    <div id="arabic-series-seasons">
+      <!-- Seasons and episodes will be dynamically inserted here -->
+    </div>
+    
+
+    <div id="arabic-series-episodes"></div>
+
+
+    <!-- Video Player for Episodes -->
+    <div id="arabic-series-video-player">
+      <!-- Video player for episodes will be dynamically inserted here -->
+
+ 
+
+    </div>
+
+  </div>
+</div>
+
+<!-- ARABIC MOVIES SECTION -->
+<div class="movie-section">
+  <div class="section-header">
+    <h2>Arabic Movies</h2>
+    <button data-type="view-all" data-section-type="movies" id="ar-movies-viewall">View More</button>
+  </div>
+  <div class="movie-container">
+      <button class="scroll-btn left-btn">&lt;</button>
+      <div class="movie-row" id="arabic-movies"></div>
+      <button class="scroll-btn right-btn">&gt;</button>
+  </div>
+</div>
+
+
+<!-- Modal for Arabic Movies -->
+<div id="arabic-movies-modal" class="modal">
+  <div class="ar-modal-content">
+    <div class="modal-header">
+      <span class="close-btn">&times;</span>
+    </div>
+    
+    <!-- Trailer iframe -->
+    <div id="arabic-movies-trailer-container">
+      <iframe id="arabic-movies-trailer" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+    <!-- Movie Backdrop (replacing the poster img) -->
+    <div id="arabic-movies-backdrop" class="arabic-movie-backdrop"></div>
+
+    <!-- Movie Title -->
+    <h3 id="arabic-movies-title"></h3> <!-- Dynamic movie title inside the modal -->
+
+    <!-- Movie Details -->
+    <p id="arabic-movies-description"></p>
+    <p id="arabic-movies-genre"></p>
+    
+    <!-- Play Movie Button -->
+    <button onclick="playMovie()">Play Movie</button>
+  </div>
+</div>
+
+
+</html>
