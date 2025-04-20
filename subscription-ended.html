@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Ended</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        h1 { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Subscription has ended</h1>
+    <p>Please renew to continue using the service.</p>
+
+    <script>
+        async function checkSession() {
+            try {
+                const response = await fetch('/api/check-session', { credentials: 'include' });
+                const data = await response.json();
+
+                if (response.ok) {
+                    console.log("✅ User is active. Redirecting to home...");
+                    window.location.href = "/"; // ✅ Redirect active users to main site
+                }
+            } catch (error) {
+                console.log("❌ User session expired, staying on subscription-ended page.");
+            }
+        }
+        checkSession(); // Run check on page load
+    </script>
+</body>
+</html>

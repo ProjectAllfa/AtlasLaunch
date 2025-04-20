@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Login</title>
+    <link rel="stylesheet" href="agentlogin.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Login Form -->
+        <div class="form-container" id="login-container">
+            <div class="form-header">
+                <h2>Agent Login</h2>
+                <p>Please login to access your dashboard.</p>
+            </div>
+            <form id="login-form" class="form" method="POST">
+                <div class="input-group">
+                    <label for="username"></label>
+                    <input type="text" id="username" name="username" placeholder="Username" required />
+                </div>
+                <div class="input-group">
+                    <label for="password"></label>
+                    <input type="password" id="password" name="password" placeholder="Password" required />
+                </div>
+                <button type="submit" id="login-btn">Login</button>
+                <p>Don't have an account? <a href="#" id="show-signup-form">Sign Up</a></p>
+            </form>
+        </div>
+
+        <!-- Sign Up Form -->
+        <div class="form-container hidden" id="signup-container">
+            <div class="form-header">
+                <h2>Agent Sign Up</h2>
+                <p>Create a new agent account.</p>
+            </div>
+            <form id="signup-form" class="form" method="POST">
+                <div class="input-group">
+                    <label for="signup-username"></label>
+                    <input type="text" id="signup-username" name="username" placeholder="Username" required />
+                </div>
+                <div class="input-group">
+                    <label for="signup-password"></label>
+                    <input type="password" id="signup-password" name="password" placeholder="Password" required />
+                </div>
+                <div class="input-group">
+                    <label for="signup-phone"></label>
+                    <input type="text" id="signup-phone" name="phoneNumber" placeholder="Phone Number" required />
+                </div>
+                <button type="submit" id="signup-btn">Sign Up</button>
+                <p>Already have an account? <a href="#" id="show-login-form">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="agentlogin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <!-- Include FontAwesome (you can add this in the <head> section) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+
+<body>
+    <header>
+      
+      <div class="header-left">
+        <h1>Agent Dashboard</h1>
+        <button id="home-btn" class="home-btn">Home</button>
+    </div>
+
+        <div class="header-right">
+            <!-- Add this somewhere in your navbar, next to balance -->
+            <button id="deposit-btn" class="deposit-btn">Deposit</button>
+
+            <button id="logout-btn">Logout</button>
+            
+            <!-- Profile Container -->
+            <div class="profile-container">
+                <!-- Profile Button -->
+                <button id="profile-btn" class="profile-btn">
+                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="4"></circle>
+                        <path d="M4 20c0-4 4-7 8-7s8 3 8 7"></path>
+                    </svg>
+                </button>
+        
+                <!-- Profile Dropdown Menu (hidden by default) -->
+                <div id="profile-dropdown" class="profile-dropdown">
+                    <div class="dropdown-content">
+                        <!-- Agent Information -->
+                        <span id="agent-username">Username: </span>
+                        <span id="agent-phone">Phone: </span>
+                        <span id="agent-balance">Balance: </span>
+                        <span id="agent-wallet">Wallet: </span> <!-- ✅ New line -->
+        
+                        <!-- Close Button -->
+                        <button class="close-btn">×</button>
+                    </div>
+                </div>
+            </div>
+        
+            <span id="header-balance" class="balance">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 9m18 0V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v3" />
+                </svg>
+                <span class="balance-text">$0.00</span>
+            </span>
+        </div>
+    </header>
+    
+    
+    
+    <main>
+
+       <!-- User Creation Section -->
+<section class="create-user">
+  <h2>Create New User</h2>
+  <form id="create-user-form">
+      <label for="username">Username (Required):</label>
+      <input type="text" id="username" required placeholder="Username">
+
+      <label for="password">Password (Required):</label>
+      <input type="password" id="password" required placeholder="Password">
+
+      <label>Subscription Duration (Required):</label>
+      <div class="subscription-buttons">
+          <button type="button" class="duration-btn" data-duration="1">1 Month | $2</button>
+          <button type="button" class="duration-btn" data-duration="6">6 Months | $12</button>
+          <button type="button" class="duration-btn" data-duration="12">1 Year | $24</button>
+      </div>
+      <input type="hidden" id="subscription-duration" required>
+
+      <label for="account-name">Account Name (Optional):</label>
+      <input type="text" id="account-name" placeholder="Full Name">
+
+      <label for="account-phone">Account Phone (Optional):</label>
+      <input type="text" id="account-phone" placeholder="Phone Number">
+
+      <button type="submit" class="submit-btn">Create User</button>
+  </form>
+  <p id="status-message"></p>
+</section>
+
+<!-- User List Section -->
+<section class="user-list">
+  <div class="header-container">
+      <h2>Users List</h2>
+      <!-- Search Input -->
+      <div class="search-container">
+          <div class="input-with-icon">
+              <input type="text" id="user-search" placeholder="Search by Username" oninput="filterUserList()">
+              <i class="fa fa-search search-icon"></i>
+          </div>
+      </div>
+      <!-- Filter Section -->
+      <div class="filter-container">
+          <span>Filter by:</span>
+          <button id="filter-all" class="filter-btn active" onclick="filterUsers('all')">
+              <span class="circle"></span> All
+          </button>
+          <button id="filter-active" class="filter-btn" onclick="filterUsers('active')">
+              <span class="circle"></span> Active
+          </button>
+          <button id="filter-inactive" class="filter-btn" onclick="filterUsers('inactive')">
+              <span class="circle"></span> Inactive
+          </button>
+      </div>
+  </div>
+  <table>
+      <thead>
+          <tr>
+              <th>Username</th>
+              <th>Subscription Expiry</th>
+              <th>Remaining</th>
+              <th>Status</th>
+              <th>Account Name</th>
+              <th>Account Phone</th>
+              <th>Creation Date</th>
+          </tr>
+      </thead>
+      <tbody id="user-table-body">
+          <!-- User rows will be inserted here dynamically -->
+      </tbody>
+  </table>
+</section>
+
+
+
+        <!-- Renew Subscription Modal (Initially Hidden) -->
+<div id="renew-modal" class="modal">
+  <div class="modal-content">
+      <!-- Close Button INSIDE modal-content -->
+      <div class="modal-header">
+          <h2>Renew Subscription</h2>
+          <span class="close-btn">&times;</span>
+      </div>
+
+      <form id="renew-subscription-form">
+          <!-- Displayed Username -->
+          <div id="renew-username-display" class="username-display">
+              Username: <span id="renew-username-text"></span>
+          </div>
+          
+          <!-- Hidden input for logic -->
+          <input type="hidden" id="renew-username" required>
+
+          <label>Select Duration:</label>
+          <div class="subscription-buttons">
+              <button type="button" class="renew-btn" data-duration="1">1 Month | $2</button>
+              <button type="button" class="renew-btn" data-duration="6">6 Months | $12</button>
+              <button type="button" class="renew-btn" data-duration="12">1 Year | $24</button>
+          </div>
+          <input type="hidden" id="renew-duration" required>
+
+          <button type="submit">Renew</button>
+      </form>
+      <p id="renew-status-message"></p>
+  </div>
+</div>
+
+
+<!-- Deposit Section (Initially Hidden) -->
+<section id="deposit-section" style="display: none;">
+    <div class="deposit-container">
+      <h2>Deposit Crypto</h2>
+  
+      <div class="deposit-box">
+        <div class="field">
+          <label>Selected Coin</label>
+          <div class="value">
+            <img src="/images/usdt-logo.png" alt="USDT" class="coin-logo">
+            <span>USDT (Tether)</span>
+          </div>
+        </div>
+  
+        <div class="field">
+          <label>Selected Network</label>
+          <div class="value">
+            <img src="/images/bsc-logo.png" alt="BSC" class="coin-logo">
+            <span>BSC (BEP20)</span>
+          </div>
+        </div>
+  
+        <div class="field">
+          <label>Deposit Address</label>
+          <div class="address-field">
+            <input type="text" id="deposit-address" readonly>
+            <button id="copy-address-btn">Copy</button>
+          </div>
+        </div>
+  
+        <p class="deposit-warning">Send only <strong>USDT (BEP20)</strong> to this address. Sending any other coin or network may result in loss of funds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deposit History Section (New) -->
+<section id="deposit-history-section" style="display: none;">
+  <div class="deposit-history-container">
+    <div class="section-header">
+      <h2>Deposit History</h2>
+      <button id="refresh-deposit-history" class="refresh-btn" title="Refresh Deposit History">
+        <i class="fas fa-sync-alt"></i>
+      </button>      
+    </div>
+
+    <!-- ✅ Loading Spinner -->
+    <div id="deposit-loading" style="display: none; margin: 10px 0; color: #888;">Loading...</div>
+
+    <!-- ✅ Error Message Display -->
+    <div id="deposit-error-message" style="color: red; margin-bottom: 10px;"></div>
+
+    <table id="deposit-history-table">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>From Wallet</th>
+          <th>Coin</th>
+          <th>Amount</th>
+          <th>To Wallet</th>
+          <th>Transaction Hash</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Deposits will be dynamically inserted here -->
+      </tbody>
+    </table>
+  </div>
+</section>
+
+    </main>
+
+    <script src="dashboard.js"></script>
+</body>
+
+
+</html>
