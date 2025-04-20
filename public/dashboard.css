@@ -1,0 +1,1037 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* Dark background for dark mode */
+    color: white;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #1a1a1a;
+    border-bottom: 2px solid #333;
+}
+
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.home-btn {
+    background-color: #333;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between balance and logout button */
+}
+
+#header-balance {
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(135deg, #272727 0%, #333333 100%);
+    padding: 8px 15px;
+    border-radius: 20px; /* Rounded badge style */
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Style the wallet icon */
+#header-balance svg {
+    width: 22px; /* Adjust icon size */
+    height: 22px;
+}
+
+
+header h1 {
+    font-size: 24px;
+    color: #fff;
+}
+
+#logout-btn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+#logout-btn:hover {
+    background: #e63939;
+}
+
+/* Deposit Button Styling */
+.deposit-btn {
+    background-color: #1a73e8;  /* Blue color for the button */
+    color: white;               /* White text color */
+    font-size: 14px;            /* Smaller font size */
+    font-weight: bold;          /* Bold text */
+    padding: 10px 15px;          /* Smaller padding for a more compact button */
+    border: none;               /* Remove default border */
+    border-radius: 5px;         /* Rounded corners */
+    cursor: pointer;           /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for background color and shadow */
+    text-align: center;         /* Center the text */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Hover Effect */
+.deposit-btn:hover {
+    background-color: #1558a7;  /* Darker blue on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Slightly larger shadow */
+}
+
+/* Focus Effect */
+.deposit-btn:focus {
+    outline: none;              /* Remove default focus outline */
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.5); /* Blue glow effect */
+}
+
+/* Active (click) Effect */
+.deposit-btn:active {
+    background-color: #0d47a1;  /* Even darker blue when clicked */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Reset shadow */
+}
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/* Main Layout */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+
+/* Create User Section */
+.create-user {
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 20px;
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+  
+}
+
+.create-user h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #fff;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+/* Form Styles */
+#create-user-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#create-user-form label {
+    font-weight: bold;
+    margin-top: 10px;
+    color: #ddd;
+}
+
+#create-user-form input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 5px;
+    background-color: transparent;
+    color: white;
+}
+
+#create-user-form input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Subscription Buttons */
+.subscription-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+/* Subscription Duration Buttons */
+.subscription-buttons .duration-btn {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #414040; /* Gray border */
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Hover only (not selected) */
+.subscription-buttons .duration-btn:hover {
+    border-color: #007bff; /* Blue border on hover */
+}
+
+/* Selected (class added by JS) */
+.subscription-buttons .duration-btn.selected {
+    background-color: #007bff !important;
+    color: white !important;
+    border-color: #007bff !important;
+}
+
+
+/* Submit Button (Scoped) */
+#create-user-form .submit-btn {
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+#create-user-form .submit-btn:hover {
+    background: #0056b3;
+}
+
+/* Status Message */
+#status-message {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+    color: #ddd;
+}
+
+/* Style for user creation toast */
+.user-created-toast {
+    position: fixed;
+    top: 93%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(20px);
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Show the toast */
+.user-created-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Default background color (success green) */
+.user-created-toast {
+    background-color: #4CAF50; /* Green for success */
+}
+
+/* If you want a custom error style, like for failed user creation, you can add an 'error' class */
+.user-created-toast.error {
+    background-color: #d73f3f; /* Red for error */
+}
+
+
+/*//////////////////////////////////////////////////////////////////////// USER LIST SECTION ////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+/* User List Section */
+.user-list {
+    width: 100%;
+    max-width: 1200px;
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+   
+}
+
+.user-list h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #fff;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+/* Table Styles Specific to User List */
+.user-list table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+}
+
+.user-list th, .user-list td {
+    padding: 10px;
+    border: 1px solid #333;
+    text-align: center;
+}
+
+.user-list th {
+    background-color: #222;
+}
+
+.user-list td {
+    background-color: #1a1a1a;
+}
+
+
+.user-list td.status-active {
+    color: #46d369;
+}
+
+.user-list td.status-inactive {
+    color: #e63946;
+}
+
+/* Renew Button Style */
+.renew-action {
+    padding: 8px 14px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.renew-action:hover {
+    background-color: #0056b3;
+}
+
+/* Container for the title and search input */
+.header-container {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Style for the search container */
+.search-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Input with the search icon inside */
+.input-with-icon {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+}
+
+/* Style for the search input */
+#user-search {
+    padding: 8px 10px 8px 30px; /* Added padding to accommodate icon inside */
+    font-size: 16px;
+    width: 100%;
+    background-color: #333; /* Dark background */
+    border: 1px solid #444; /* Border color */
+    color: #fff; /* White text color */
+    border-radius: 5px;
+    transition: border 0.3s;
+}
+
+#user-search:focus {
+    border-color: #00bcd4; /* Highlight color on focus */
+    outline: none;
+}
+
+/* Style for the search icon */
+.search-icon {
+    position: absolute;
+    left: 10px; /* Position icon inside the input field */
+    font-size: 18px;
+    color: #888; /* Light color for the icon */
+    transition: color 0.3s;
+}
+
+#user-search:focus + .search-icon {
+    color: #00bcd4; /* Highlight color for the icon on focus */
+}
+
+/* Filter Section */
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.filter-container span {
+    color: #ccc;
+    font-size: 16px;
+}
+
+.filter-btn {
+    background: transparent;
+    border: none;
+    color: #ccc;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.filter-btn .circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.filter-btn.active .circle {
+    background-color: #007bff; /* Blue for active selection */
+    border-color: #007bff;
+}
+
+.filter-btn:hover {
+    color: #fff;
+}
+
+.filter-btn.active {
+    color: #007bff; /* Active button color */
+}
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/* New container for profile button and dropdown */
+.profile-container {
+    position: relative; /* This makes the dropdown position relative to the profile button */
+    display: inline-block; /* Keep it inline with other header elements */
+}
+
+/* Profile Button */
+.profile-btn {
+    background-color:#272727;
+    border: none;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 8px; /* Adding space around the icon */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Circular button */
+    transition: transform 0.3s ease;
+}
+
+/* Profile Button SVG Icon */
+.profile-btn svg {
+    width: 26px; /* Ensure the icon has a set size */
+    height: 26px; /* Ensure the icon has a set size */
+    pointer-events: none; /* Make sure SVG doesn't block click events */
+}
+
+/* Profile Dropdown */
+.profile-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);  /* Position below the profile button, with a 10px gap */
+    right: 0;   /* Align the dropdown to the right edge of the profile container */
+    display: none; /* Hidden by default */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    z-index: 9999;  /* Ensure it appears on top */
+}
+
+/* Dropdown Pointer Arrow (Triangle) */
+.profile-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -10px;   /* Position the arrow above the dropdown */
+    right: 10px;  /* Adjust as needed for alignment */
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fff; /* White arrow */
+}
+
+/* Dropdown Content */
+.dropdown-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+}
+
+.dropdown-content span {
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+/* Close Button */
+.dropdown-content .close-btn {
+    position: absolute; /* Position it absolutely inside the dropdown */
+    top: 10px; /* Distance from the top */
+    right: 10px; /* Distance from the right */
+    font-size: 24px;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0; /* Remove extra margin */
+}
+
+.dropdown-content .close-btn:hover {
+    color: #333;
+}
+
+/* Show the profile dropdown when the profile button is clicked */
+.profile-dropdown.show {
+    display: block;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+    .profile-dropdown {
+        width: 90%;
+    }
+}
+
+/*/////////////////////////////////////////////////////////////////////////MODAL FOR SUBSCRIPTION RENEWWAL /////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/* Modal Background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    width: 500px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    position: relative; /* This ensures close button is positioned correctly */
+}
+
+/* Modal Header */
+.modal-header {
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: red;
+}
+
+
+/* Renew Duration Buttons (Same style as create user buttons) */
+.subscription-buttons .renew-btn {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Hover & Selected */
+.subscription-buttons .renew-btn:hover,
+.subscription-buttons .renew-btn.selected {
+    background-color: #007bff !important;
+    color: white !important;
+    border-color: #0056b3 !important;
+}
+
+/* Renew Button Inside Modal */
+#renew-subscription-form button[type="submit"] {
+    background-color: #007bff; /* Blue background */
+    border: 1px solid #007bff; /* Blue border */
+    color: white; /* White text */
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Hover effect for Renew Button */
+#renew-subscription-form button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    border-color: #0056b3; /* Darker border on hover */
+}
+
+
+.username-display {
+    margin-bottom: 10px;
+}
+
+/* Style for subscription renewal toast */
+.subscription-renew-toast {
+    position: fixed;
+    top: 93%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(20px);
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Show the toast */
+.subscription-renew-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* If you want a custom error style, like for failed renewals, you can add an 'error' class */
+.subscription-renew-toast.error {
+    background-color: #d73f3f;
+}
+
+/* Default background color (success green) */
+.subscription-renew-toast {
+    background-color: #4CAF50;
+}
+
+
+/*///////////////////////////////////////////////////// DEPOSIT SECTION CSS //////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.deposit-container {
+    max-width: 500px;
+    margin: 40px auto;
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 16px;
+ 
+    color: #fff;
+  }
+  
+  .deposit-box .field {
+    margin-bottom: 20px;
+  }
+  
+  .deposit-box label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #ccc;
+  }
+  
+  .deposit-box .value {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #2c2c2c;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .coin-logo {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .address-field {
+    display: flex;
+    gap: 10px;
+  }
+  
+  #deposit-address {
+    flex: 1;
+    background: #2c2c2c;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  #copy-address-btn {
+    padding: 10px 16px;
+    background-color: #f0b90b;
+    border: none;
+    color: #000;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .deposit-warning {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #ffa500;
+  }
+  
+  .copy-toast {
+    position: fixed;
+    top: 93%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(20px);
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.copy-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.copy-toast.error {
+    background-color: #d73f3f;
+}
+
+/*//////////////////////////////////////////////////////////////////////// DEPOSIT HISTORY SECTION ////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/* Deposit History Section */
+#deposit-history-section {
+    width: 100%;
+    max-width: 900px;
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#deposit-history-section h2 {
+    font-size: 20px;
+    color: #fff;
+    margin: 0; /* remove bottom margin since the header handles spacing */
+  }
+
+/* Table Styles */
+#deposit-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+}
+
+#deposit-history-table th, #deposit-history-table td {
+    padding: 10px;
+    border: 1px solid #333;
+    text-align: center;
+}
+
+#deposit-history-table th {
+    background-color: #222;
+}
+
+#deposit-history-table td {
+    background-color: #1a1a1a;
+}
+
+/* Custom Status Styles for Deposit History */
+#deposit-history-table td.status-completed {
+    color: #46d369; /* Green for completed status */
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 2px solid #333; /* ✅ Move border here */
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+  }
+
+  .refresh-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #888;
+    transition: color 0.3s;
+  }
+  
+  .refresh-btn:hover {
+    color: #00bcd4; /* Or your preferred highlight color */
+  }
+  
+/* Spin animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .refresh-btn i.spinning {
+    animation: spin 0.6s linear;
+  }
+  
+
+
+/* MEDIA QUERY ALL */
+@media (max-width: 768px) {
+    .subscription-buttons .duration-btn {
+        padding: 6px;
+    }
+  }
+  
+
+
+
+/* --- Mobile: transform into stacked cards --- */
+@media (max-width: 768px) {
+    .user-list table,
+    .user-list thead,
+    .user-list tbody,
+    .user-list th,
+    .user-list td,
+    .user-list tr {
+      display: block;
+     
+    }
+  
+    .user-list thead {
+      display: none; /* Hide column headers */
+    }
+  
+    .user-list tr {
+      margin-bottom: 15px;
+      background-color: #1f1f1f;
+      border-radius: 10px;
+      padding: 12px;
+     
+    }
+  
+    .user-list td {
+      display: flex;
+      justify-content: space-between;
+     
+      border: none;
+      border-bottom: 1px solid #333;
+    }
+  
+    .user-list td:last-child {
+      border-bottom: none;
+    }
+  
+    .user-list td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      color: #515151;
+      
+    }
+
+    .filter-container {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .input-with-icon {
+        max-width: none;
+    }
+  }
+  
+  
+/* Responsive tweaks */
+@media (max-width: 480px) {
+    .profile-dropdown {
+        width: 90%;
+    }
+}
+
+/* Mobile-Responsive Header */
+@media (max-width: 768px) {
+    .create-user {
+      width: auto;
+    }
+  
+    .user-list {
+      width: 90%;
+      background: none;
+    }
+  }
+  
+  
+  
+/* Mobile-Responsive Header */
+@media (max-width: 768px) {
+    header {
+        padding: 12px 16px; /* Reduce padding further for mobile */
+        flex-direction: column; /* Stack header items */
+        text-align: center;
+    }
+
+    .header-left,
+    .header-right {
+        gap: 10px; /* Reduce gap for mobile */
+        width: 100%; /* Allow elements to span full width */
+        justify-content: center;
+    }
+
+    h1 {
+        font-size: 18px; /* Reduce header size on mobile */
+    }
+
+    #header-balance {
+        font-size: 14px; /* Smaller font for balance */
+        padding: 6px 12px; /* Adjust padding */
+    }
+
+    #logout-btn {
+        font-size: 14px; /* Smaller font size */
+        padding: 8px 12px; /* Adjust padding */
+    }
+
+    .deposit-btn  {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    .home-btn {
+        font-size: 12px; /* Smaller home button text */
+        padding: 6px 10px; /* Adjust padding */
+    }
+}
+
+/* Mobile-responsive deposit history cards - matches user-list styling */
+@media (max-width: 768px) {
+
+    .deposit-container {
+        padding: 20px;
+        margin: 0px;
+    }
+
+    #deposit-history-section {
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      background: none;
+      margin-top: 50px;
+    }
+  
+    #deposit-history-table,
+    #deposit-history-table thead,
+    #deposit-history-table tbody,
+    #deposit-history-table th,
+    #deposit-history-table td,
+    #deposit-history-table tr {
+      display: block;
+      
+    }
+  
+    #deposit-history-table thead {
+      display: none;
+    }
+  
+    #deposit-history-table tr {
+      margin-bottom: 15px;
+      background-color: #1f1f1f;
+      border-radius: 10px;
+      padding: 12px;
+      position: relative;
+    }
+  
+    #deposit-history-table td {
+      display: flex;
+      justify-content: space-between;
+      border: none;
+      border-bottom: 1px solid #333;
+      text-align: right;
+    }
+  
+    #deposit-history-table td:last-child {
+      border-bottom: none;
+    }
+  
+    /* Create pseudo-labels using CSS attr() and column classes */
+    #deposit-history-table td::before {
+      content: attr(data-column);
+      font-weight: bold;
+      color: #515151;
+      margin-right: 10px;
+      text-align: left;
+      flex: 1;
+    }
+  
+    /* Set data-column attributes dynamically via CSS based on cell classes */
+    #deposit-history-table .deposit-timestamp::before { content: "Time:"; }
+    #deposit-history-table .deposit-from::before { content: "From Wallet:"; }
+    #deposit-history-table .deposit-coin::before { content: "Coin:"; }
+    #deposit-history-table .deposit-amount::before { content: "Amount:"; }
+    #deposit-history-table .deposit-to::before { content: "To Wallet:"; }
+    #deposit-history-table .deposit-txHash::before { content: "TX Hash:"; }
+    #deposit-history-table .deposit-status::before { content: "Status:"; }
+  
+    /* Status styling to match user-list */
+    #deposit-history-table .deposit-status.status-completed {
+      color: #46d369;
+      font-weight: bold;
+    }
+  
+    /* Transaction hash link styling */
+    #deposit-history-table .deposit-txHash a {
+      color: #1a73e8;
+      word-break: break-all;
+    }
+  }

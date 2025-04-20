@@ -1,0 +1,64 @@
+/* General styling */
+body { 
+    font-family: Arial, sans-serif; 
+    text-align: center; 
+    margin: 50px; 
+}
+
+h1 { 
+    color: #ff0000; 
+}
+
+input { 
+    display: block; 
+    margin: 10px auto; 
+    padding: 10px; 
+    width: 300px; 
+}
+
+button { 
+    padding: 10px 20px; 
+    margin-top: 10px; 
+    cursor: pointer; 
+}
+
+#message { 
+    margin-top: 20px; 
+    font-weight: bold; 
+}
+
+/* Table styles */
+table { 
+    width: 80%; 
+    margin: 20px auto; 
+    border-collapse: collapse; 
+    display: none; 
+}
+
+th, td { 
+    border: 1px solid black; 
+    padding: 10px; 
+    text-align: left; 
+}
+
+th { 
+    background-color: #f2f2f2; 
+}
+
+/* Active/Inactive status colors */
+.active-true { 
+    color: green; 
+    font-weight: bold; 
+}
+
+.active-false { 
+    color: red; 
+    font-weight: bold; 
+}
+
+#user-stats {
+    display: flex;
+    gap: 15px; /* Space between items */
+    font-weight: bold;
+    justify-content: center; /* Centers content horizontally */
+}

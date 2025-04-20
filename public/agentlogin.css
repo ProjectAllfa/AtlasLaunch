@@ -1,0 +1,153 @@
+
+/* Background styling */
+body {
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    position: relative;
+}
+
+/* Overlay effect */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.329); /* Adjust opacity here */
+    z-index: 1;
+}
+
+/* Logo positioning */
+.logo-container {
+    position: absolute;
+    top: 30px;
+    left: 60px;
+    z-index: 2; /* Ensure it's above the overlay */
+}
+
+.logo-container img {
+    width: 150px; /* Adjust size as needed */
+    height: auto;
+}
+
+/* Form container styling */
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    background: rgba(0, 0, 0, 0.7); /* Transparent black background */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 300px;
+    z-index: 2;
+    position: relative;
+}
+
+/* Hide elements */
+.hidden {
+    display: none;
+}
+
+/* Form header */
+.form-header h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.form-header p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Input group */
+.input-group {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 14px;
+    color: white;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: rgba(42, 44, 46, 0.3);
+    color: white;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Placeholder text */
+input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Button */
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background: #e50914; /* Netflix red */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Button hover effect */
+button:hover {
+    background: #b20710;
+}
+
+/* Sign-up / Login toggle link */
+p {
+    font-size: 14px;
+    color: white;
+}
+
+p a {
+    color: #e50914;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+
+
+/*//////////////////////////////////////////////////////////////////// MEDIA QUERY - Agent Login ////////////////////////////////////////////////////////////////////////////////////// */
+
+@media (max-width: 768px) {
+    .form-container {
+        padding: 20px;
+    }
+}
+
+
