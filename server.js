@@ -3382,9 +3382,10 @@ app.get('/api/search/youtube', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Server running at https://cimaway.com:${port}`);
 });
+
 
 
 // ROUTE FOR MOVIE DATA BY ID //
