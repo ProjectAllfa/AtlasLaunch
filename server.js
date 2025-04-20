@@ -67,7 +67,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // Allow frontend to send credentials (cookies)
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: "https://cimaway.com",  // Replace with your production frontend URL
   credentials: true
 }));
 
@@ -3383,9 +3383,8 @@ app.get('/api/search/youtube', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at https://cimaway.com:${port}`);
 });
-
 
 
 // ROUTE FOR MOVIE DATA BY ID //
