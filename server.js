@@ -3561,6 +3561,24 @@ app.post('/api/logout', requireAuth, async (req, res) => {
 
 
 
+// LOG OUT API (for expired users without JWT token)
+app.post('/api/logout-subscription-expired', async (req, res) => {
+  try {
+    // Check if the user has a session token
+    if (req.cookies.sessionToken) {
+      // If session exists, clear session cookie
+      res.clearCookie("sessionToken");
+      return res.json({ message: "Logged out successfully, session expired" });
+    } else {
+      // If no session token, the user is already logged out
+      return res.status(400).json({ message: "No active session found" });
+    }
+  } catch (error) {
+    console.error("Logout Error:", error);
+    res.status(500).json({ message: "An error occurred while logging out" });
+  }
+});
+
 
 
 
