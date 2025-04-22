@@ -36,13 +36,13 @@ const router = express.Router();  // <-- Define router
 const TMDB_API_URL = 'https://api.themoviedb.org/3';  // Make sure the base URL is defined
 
 // Replace with your actual TMDb bearer token
-const TMDB_BEARER_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MmJhMTBjNDI5OTE0MTU3MzgwOGQyNzEwNGVkMThmYSIsInN1YiI6IjY0ZjVhNTUwMTIxOTdlMDBmZWE5MzdmMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.84b7vWpVEilAbly4RpS01E9tyirHdhSXjcpfmTczI3Q';
+const TMDB_BEARER_TOKEN = process.env.TMDB_BEARER_TOKEN;
 
 // Replace with your actual TMDb API key
-const TMDB_API_KEY = '7739f988085771ce86875f09588b1e86'; // Your API key here
+const TMDB_API_KEY = process.env.TMDB_API_KEY;
 
 // Replace with your actual YouTube Data API key
-const YOUTUBE_API_KEY = 'AIzaSyBx-Ezb7kUPmPQZmtiCkmXckocQWKG_4vk';
+const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 
 
 const mongoose = require('mongoose');
@@ -53,9 +53,9 @@ app.use(cookieParser()); // Allows reading cookies
 
 
 // Your MongoDB connection string (replace with your actual details)
-const mongoURI = 'mongodb+srv://abcnewzpr:wQ9R1V5yTcjHgOme@cluster0.hvnod.mongodb.net/movie_stream?retryWrites=true&w=majority';
+const mongoURI = process.env.MONGO_URI;
 
-const SECRET_KEY = "f9a8d0e5a3f24c4bb1eaf418d48c26f4f4e1f9cd09a5dfe8a5b7bc5d89c6a3a4";  
+const SECRET_KEY = process.env.SECRET_KEY;
 
 
 
