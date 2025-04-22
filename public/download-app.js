@@ -8,7 +8,7 @@ window.addEventListener('scroll', function() {
   });
   
   
-  function goHome() {
-    window.location.href = 'http://localhost:3000/'; // Replace 'index.html' with your home page URL
-  }
+ function goHome() {
+  window.location.href = 'https://www.cimaway.com/'; // Replace 'index.html' with your home page URL
+}
   
