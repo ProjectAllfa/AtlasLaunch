@@ -1,34 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscription Ended</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
-        h1 { color: red; }
-    </style>
-<link rel="icon" type="image/png" href="favicon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <title>Subscription Ended</title>
+  <link rel="stylesheet" href="subscription-ended.css" />
 </head>
+
+
+<header>
+  <div class="navbar-content">
+    <!-- Logo -->
+    <div class="navbar-logo" onclick="goHome()" style="cursor: pointer;">
+      <img src="/images/logo.png" alt="Logo" />
+    </div>
+
+    <!-- Home Button -->
+    <span class="navbar-home" onclick="goHome()">
+      <i class="fas fa-arrow-left"></i>
+    </span>
+
+    <!-- Log Out Button -->
+    <button class="navbar-logout" onclick="logout()">Log Out</button>
+  </div>
+</header>
+
+  
+
 <body>
-    <h1>Subscription has ended</h1>
-    <p>Please renew to continue using the service.</p>
+  <div class="container">
+    <!-- Main warning card -->
+    <div class="card">
+      <div class="icon-container">
+        <!-- FontAwesome warning icon -->
+        <i class="fa-solid fa-triangle-exclamation warning-icon"></i>
+      </div>
+      <h2 class="title">Your subscription has expired</h2>
+      <p class="message">
+        Your subscription has expired, and as a result, your access to our content has been suspended. To continue enjoying unlimited access to all movies and series, please renew your subscription.
+      </p>
+    </div>
 
-    <script>
-        async function checkSession() {
-            try {
-                const response = await fetch('/api/check-session', { credentials: 'include' });
-                const data = await response.json();
+    <!-- Optional: Renewal instructions or link -->
+    <div class="renewal-info">
+      <p>If you need assistance with renewing your subscription, please <a href="/support">contact our support team</a>.</p>
+    </div>
+  </div>
 
-                if (response.ok) {
-                    console.log("✅ User is active. Redirecting to home...");
-                    window.location.href = "/"; // ✅ Redirect active users to main site
-                }
-            } catch (error) {
-                console.log("❌ User session expired, staying on subscription-ended page.");
-            }
-        }
-        checkSession(); // Run check on page load
-    </script>
+  <script src="subscription-ended.js"></script>
 </body>
 </html>
