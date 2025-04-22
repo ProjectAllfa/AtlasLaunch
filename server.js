@@ -213,6 +213,12 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'login.html'));
 });
 
+// Serve the HTML page
+app.get('/download-app', (req, res) => {
+  res.sendFile(path.join(__dirname, 'download-app.html'));
+});
+
+
 const turkishSeriesFilePath = path.join(__dirname, 'public', 'data', 'turkish_series.json');
 // ✅ Define correct paths to the files inside public/data/
 const movieFilePath = path.join(__dirname, 'public', 'data', 'mov_tmdb.txt');
