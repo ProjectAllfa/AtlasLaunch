@@ -3492,15 +3492,9 @@ app.get('/api/session-events', requireAuth, (req, res) => {
 
     clients[username] = res; // Store SSE connection for this user
 
-    // 🫀 Send a heartbeat every 25 seconds to keep the connection alive
-    const heartbeat = setInterval(() => {
-        res.write(':\n\n'); // This is a comment in SSE (ignored by browser but keeps connection alive)
-    }, 25000);
-
-    // 🧹 Clean up when client disconnects
+    // Remove client when connection closes
     req.on('close', () => {
-        clearInterval(heartbeat); // Stop sending heartbeat
-        delete clients[username]; // Remove client from list
+        delete clients[username];
     });
 });
 
