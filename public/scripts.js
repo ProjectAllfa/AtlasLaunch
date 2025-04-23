@@ -3892,7 +3892,7 @@ async function playEpisode(seriesId, seasonNumber, episodeTitle, episodeUrl, sea
     console.log(`🎬 Playing Episode: ${episodeTitle} | URL: ${episodeUrl}`);
 
     const encodedEpisodeUrl = encodeURIComponent(episodeUrl);
-    const url = `https://203.161.60.41/get_watch_server?episode_url=${encodedEpisodeUrl}`;
+    const url = `https://www.cimaway.com/get_watch_server?episode_url=${encodedEpisodeUrl}`;
     console.log(`📡 Requesting Watch Server: ${url}`);
 
     const response = await fetch(url);
