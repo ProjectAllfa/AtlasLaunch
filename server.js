@@ -3420,39 +3420,6 @@ app.get('/api/tv/:id', async (req, res) => {
 });
 
 
-// Route to fetch series data by ID
-app.get('/local-seasons', (req, res) => {
-  const seriesId = req.query.id; // Get series ID from the request
-
-  if (!seriesId) {
-    return res.status(400).json({ error: 'Series ID is required' });
-  }
-
-  const filePath = path.join(__dirname, 'public/data/local_seasons.json');
-
-  // Read the JSON file
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading local_seasons.json:', err);
-      return res.status(500).json({ error: 'Internal Server Error' });
-    }
-
-    try {
-      const localSeasons = JSON.parse(data);
-      const series = localSeasons.find(s => s.id === seriesId);
-
-      if (!series) {
-        return res.status(404).json({ error: 'Series not found' });
-      }
-
-      res.json(series);
-    } catch (parseError) {
-      console.error('Error parsing local_seasons.json:', parseError);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
-});
-
 
 
 
