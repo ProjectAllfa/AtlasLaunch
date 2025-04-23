@@ -3189,56 +3189,6 @@ app.get('/api/tv/:id/season/:season/episode/:episode/streams', async (req, res) 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-///////// route for vidsrc.cc api fetching video ////////////
-
-// Route to get movie embed URL from Vidsrc.cc API
-app.get('/api/movie/:id/embed', async (req, res) => {
-  const movieId = req.params.id;
-  try {
-    // Construct the Vidsrc embed URL
-    const videoUrl = `https://vidsrc.cc/v2/embed/movie/${movieId}`;
-    res.json({ videoUrl });
-  } catch (error) {
-    console.error('Error fetching movie embed URL:', error.message);
-    res.status(500).json({ message: 'Error fetching movie embed URL', error: error.message });
-  }
-});
-
-
-
-// Route to get TV show embed URL from Vidsrc.cc API
-app.get('/api/tv/:id/embed', async (req, res) => {
-  const tvId = req.params.id;
-  try {
-    // Construct the Vidsrc embed URL
-    const videoUrl = `https://vidsrc.cc/v2/embed/tv/${tvId}`;
-    res.json({ videoUrl });
-  } catch (error) {
-    console.error('Error fetching TV show embed URL:', error.message);
-    res.status(500).json({ message: 'Error fetching TV show embed URL', error: error.message });
-  }
-});
-
-// Route to get TV show episode embed URL from Vidsrc.cc API
-app.get('/api/tv/:id/episode/:season/:episode/embed', async (req, res) => {
-  const { id, season, episode } = req.params;
-  try {
-    // Construct the Vidsrc embed URL
-    const videoUrl = `https://vidsrc.cc/v2/embed/tv/${id}/${season}/${episode}`;
-    res.json({ videoUrl });
-  } catch (error) {
-    console.error('Error fetching TV show episode embed URL:', error.message);
-    res.status(500).json({ message: 'Error fetching TV show episode embed URL', error: error.message });
-  }
-});
-
-
-
-
-///////////////////////////////
-
 // Route to fetch movie backdrop image from TMDb
 app.get('/api/movie/:id/backdrop', async (req, res) => {
   const { id } = req.params;
