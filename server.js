@@ -3432,18 +3432,6 @@ app.get('/api/tv/:id', async (req, res) => {
 });
 
 
-// Turkish JSON file Route // 
-app.get('/api/turkish-series', (req, res) => {
-  fs.readFile(turkishSeriesFilePath, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading Turkish series file:', err);
-      return res.status(500).json({ error: 'Failed to load Turkish series data' });
-    }
-    res.json(JSON.parse(data));
-  });
-});
-
-
 // Route to fetch series data by ID
 app.get('/local-seasons', (req, res) => {
   const seriesId = req.query.id; // Get series ID from the request
