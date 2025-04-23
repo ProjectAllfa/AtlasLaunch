@@ -2262,7 +2262,7 @@ async function displaySeasonEpisodes(tvId, season) {
     episodeItem.innerHTML = `
       <div class="episode-item-content">
         <div class="episode-image">
-         <img src="${episode.still_path ? `https://image.tmdb.org/t/p/${window.innerWidth < 600 ? 'original' : 'w300'}${episode.still_path}` : trailerDiv.getAttribute('data-backdrop')}" alt="Episode ${episode.episode_number}">
+         <img src="${episode.still_path ? `https://image.tmdb.org/t/p/${window.innerWidth < 600 ? 'w780' : 'w300'}${episode.still_path}` : trailerDiv.getAttribute('data-backdrop')}" alt="Episode ${episode.episode_number}">
           <div class="play-icon">▶</div> <!-- Play icon inside each episode image -->
         </div>
         <div class="episode-info">
