@@ -3887,7 +3887,7 @@ async function setupArabicNextEpisodeButton(seriesId, seasonNumber, episodeTitle
 }
 
 
-async function playEpisode(seriesId, seasonNumber, episodeTitle, episodeUrl, seasons) {
+async function (seriesId, seasonNumber, episodeTitle, episodeUrl, seasons) {
   try {
     console.log(`🎬 Playing Episode: ${episodeTitle} | URL: ${episodeUrl}`);
 
@@ -3972,7 +3972,7 @@ async function playEpisode(seriesId, seasonNumber, episodeTitle, episodeUrl, sea
 
     // 🧠 Now do the rest in background
     if (!Array.isArray(seasons) || seasons.length === 0) {
-      console.error("❌ Error: 'seasons' is missing when calling playEpisode.");
+      console.error("❌ Error: 'seasons' is missing when calling .");
       return;
     }
 
