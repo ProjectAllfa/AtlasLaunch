@@ -3077,7 +3077,7 @@ async function displayLocalFeaturedSeries(seriesData) {
       console.log("Fetching full series data for ID:", randomSeries.id);
 
       try {
-        const fullSeriesResponse = await fetch(`/local-seasons?id=${randomSeries.id}`);
+        const fullSeriesResponse = await fetch(`/api/seasons?id=${randomSeries.id}`);
         if (!fullSeriesResponse.ok) throw new Error('Failed to fetch full series data');
 
         const fullSeriesData = await fullSeriesResponse.json();
@@ -5016,7 +5016,7 @@ if (moreResultsContainer) {
               // Fetch full series data when clicking
               movieElement.addEventListener('click', async () => {
                   try {
-                      const seriesResponse = await fetch(`/local-seasons?id=${movie.id}`);
+                      const seriesResponse = await fetch(`/api/seasons?id=${movie.id}`);
                       const seriesData = await seriesResponse.json();
                       openArabicSeriesModal(seriesData);
                   } catch (error) {
