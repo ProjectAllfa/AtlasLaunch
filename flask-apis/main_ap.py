@@ -48,13 +48,9 @@ def get_watch_server_info():
         watch_server = get_watch_server(movie_url)
 
         if watch_server:
-            # ✅ Wrap the response so the frontend receives it correctly
             return jsonify({"watch_server_url": watch_server})
         else:
             return jsonify({"error": "Watch server URL not found"}), 404
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-if __name__ == "__main__":
-    app.run(debug=False, host='0.0.0.0', port=5001)
