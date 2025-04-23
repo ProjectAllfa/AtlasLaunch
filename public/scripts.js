@@ -4782,7 +4782,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   eventSource.onerror = () => {
       console.log("⚠️ SSE Connection Lost. Attempting to reconnect...");
-      
+      eventSource.close();
   };
 });
 
