@@ -3365,7 +3365,7 @@ seasonDropdown.addEventListener('change', (event) => {
       playButton.style.display = "block";
       playButton.onclick = () => {
         removeTrailer(); // ✅ Ensure trailer is removed before playing
-        (seriesData.id, lastWatched.seasonNumber, `Episode ${lastWatched.episodeNumber}`, lastWatched.episodeUrl, seasons);
+        playEpisode(seriesData.id, lastWatched.seasonNumber, `Episode ${lastWatched.episodeNumber}`, lastWatched.episodeUrl, seasons);
       };
     } else {
       console.warn("⚠️ No watched episodes found. Defaulting to Season 1, Episode 1.");
@@ -3376,7 +3376,7 @@ seasonDropdown.addEventListener('change', (event) => {
         playButton.style.display = "block";
         playButton.onclick = () => {
           removeTrailer(); // ✅ Ensure trailer is removed before playing
-          (seriesData.id, seasons[0].season_number, `Episode 1`, seasons[0].episodes[0].url, seasons);
+          playEpisode(seriesData.id, seasons[0].season_number, `Episode 1`, seasons[0].episodes[0].url, seasons);
         };
       } else {
         console.error("❌ Error: No seasons or episodes found. Cannot set Play button.");
@@ -3511,11 +3511,11 @@ async function createSeasonList(seasons, seriesId, seriesName, fetchedData, sele
       if (playButton) {
         playButton.textContent = "▶ Continue";
         playButton.onclick = () => {
-          (seriesId, selectedSeason.season_number, episode.title, episode.url, seasons);
+          playEpisode(seriesId, selectedSeason.season_number, episode.title, episode.url, seasons);
         };
       }
 
-      (seriesId, selectedSeason.season_number, episode.title, episode.url, seasons);
+      playEpisode(seriesId, selectedSeason.season_number, episode.title, episode.url, seasons);
     });
 
     episodeItem.innerHTML = `
@@ -3737,7 +3737,7 @@ async function refreshWatchedEpisodes(seriesId, seasonNumber, seasons) {
     if (playButton) {
       playButton.textContent = "▶ Continue";
       playButton.onclick = () => {
-        (seriesId, lastWatched.seasonNumber, `Episode ${lastWatched.episodeNumber}`, lastWatched.episodeUrl, seasons);
+        playEpisode(seriesId, lastWatched.seasonNumber, `Episode ${lastWatched.episodeNumber}`, lastWatched.episodeUrl, seasons);
       };
     }
   }
@@ -3823,12 +3823,12 @@ async function setupArabicNextEpisodeButton(seriesId, seasonNumber, episodeTitle
         if (playButton) {
           playButton.textContent = "▶ Continue";
           playButton.onclick = () => {
-            (seriesId, currentSeason.season_number, nextEpisode.title, nextEpisode.url, seasons);
+            playEpisode(seriesId, currentSeason.season_number, nextEpisode.title, nextEpisode.url, seasons);
           };
         }
       }
 
-      (seriesId, currentSeason.season_number, nextEpisode.title, nextEpisode.url, seasons);
+      playEpisode(seriesId, currentSeason.season_number, nextEpisode.title, nextEpisode.url, seasons);
     };
     return;
   }
@@ -3869,12 +3869,12 @@ async function setupArabicNextEpisodeButton(seriesId, seasonNumber, episodeTitle
           if (playButton) {
             playButton.textContent = "▶ Continue";
             playButton.onclick = () => {
-              (seriesId, nextSeason.season_number, firstEpisode.title, firstEpisode.url, seasons);
+              playEpisode(seriesId, nextSeason.season_number, firstEpisode.title, firstEpisode.url, seasons);
             };
           }
         }
 
-        (seriesId, nextSeason.season_number, firstEpisode.title, firstEpisode.url, seasons);
+        playEpisode(seriesId, nextSeason.season_number, firstEpisode.title, firstEpisode.url, seasons);
       };
     } else {
       console.log("🏁 No valid first episode found in the next season.");
@@ -3887,7 +3887,7 @@ async function setupArabicNextEpisodeButton(seriesId, seasonNumber, episodeTitle
 }
 
 
-async function (seriesId, seasonNumber, episodeTitle, episodeUrl, seasons) {
+async function playEpisode(seriesId, seasonNumber, episodeTitle, episodeUrl, seasons) {
   try {
     console.log(`🎬 Playing Episode: ${episodeTitle} | URL: ${episodeUrl}`);
 
@@ -3972,7 +3972,7 @@ async function (seriesId, seasonNumber, episodeTitle, episodeUrl, seasons) {
 
     // 🧠 Now do the rest in background
     if (!Array.isArray(seasons) || seasons.length === 0) {
-      console.error("❌ Error: 'seasons' is missing when calling .");
+      console.error("❌ Error: 'seasons' is missing when calling playEpisode.");
       return;
     }
 
