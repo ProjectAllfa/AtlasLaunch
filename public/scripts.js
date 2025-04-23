@@ -4608,7 +4608,7 @@ async function playMovie() {
     const encodedMovieUrl = encodeURIComponent(movie.url);
 
     // ✅ Fetch watch server URL from your Flask API
-    const apiUrl = `http://127.0.0.1:5001/get_watch_server?movie_name=${encodedMovieName}&url=${encodedMovieUrl}`;
+    const apiUrl = `http://www.cimaway.com/get_watch_server?movie_name=${encodedMovieName}&url=${encodedMovieUrl}`;
     console.log(`📡 Request URL: ${apiUrl}`);
 
     const response = await fetch(apiUrl);
