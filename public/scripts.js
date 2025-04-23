@@ -3899,41 +3899,92 @@ async function playEpisode(seriesId, seasonNumber, episodeTitle, episodeUrl, sea
     if (!response.ok) throw new Error("Network response was not ok");
 
     const data = await response.json();
-    if (data.error) {
-      console.error("❌ Watch Server Error:", data.error);
+    if (data.error || !data.watch_server) {
+      console.error("❌ Watch Server Error:", data.error || "URL missing.");
       return;
     }
 
     const watchServerUrl = data.watch_server;
-    if (!watchServerUrl) {
-      console.error("❌ Watch server URL is missing.");
-      return;
-    }
 
-    // ✅ Ensure `seasons` is always passed correctly
+    // 🎯 PRIORITY: Show the video player FIRST
+    const existingOverlay = document.getElementById("fullscreen-overlay");
+    if (existingOverlay) existingOverlay.remove();
+
+    const fullscreenOverlay = document.createElement("div");
+    fullscreenOverlay.id = "fullscreen-overlay";
+    Object.assign(fullscreenOverlay.style, {
+      position: "fixed",
+      left: "0",
+      top: "0",
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.9)",
+      zIndex: "1000",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "hidden"
+    });
+
+    const iframe = document.createElement("iframe");
+    iframe.src = watchServerUrl;
+    Object.assign(iframe.style, {
+      width: "100%",
+      height: "100%",
+      border: "none"
+    });
+    iframe.allow = "autoplay; encrypted-media";
+    iframe.allowFullscreen = true;
+    fullscreenOverlay.appendChild(iframe);
+
+    const closeButton = document.createElement("button");
+    closeButton.textContent = "Close";
+    Object.assign(closeButton.style, {
+      position: "absolute",
+      top: "20px",
+      right: "20px",
+      fontSize: "20px",
+      color: "#fff",
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      border: "none",
+      padding: "10px",
+      cursor: "pointer"
+    });
+    closeButton.addEventListener("click", () => fullscreenOverlay.remove());
+    fullscreenOverlay.appendChild(closeButton);
+
+    const nextEpisodeBtn = document.createElement("button");
+    nextEpisodeBtn.id = "arabic-next-episode";
+    nextEpisodeBtn.textContent = "▶ Next Episode";
+    nextEpisodeBtn.classList.add("ar-next-episode-btn");
+    Object.assign(nextEpisodeBtn.style, {
+      position: "absolute",
+      fontSize: "18px",
+      color: "#fff",
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      border: "none",
+      padding: "10px",
+      cursor: "pointer"
+    });
+    fullscreenOverlay.appendChild(nextEpisodeBtn);
+
+    document.body.appendChild(fullscreenOverlay);
+
+    // 🧠 Now do the rest in background
     if (!Array.isArray(seasons) || seasons.length === 0) {
       console.error("❌ Error: 'seasons' is missing when calling playEpisode.");
       return;
     }
 
-    // ✅ Find the correct season using `season_number` only (not `real_season_number`)
     const currentSeason = seasons.find(season => season.season_number === seasonNumber);
-
     if (!currentSeason) {
-      console.warn(`⚠️ Could not find season ${seasonNumber}`, {
-        requestedSeason: seasonNumber,
-        availableSeasons: seasons.map(s => ({
-          season_number: s.season_number,
-          real_season_number: s.real_season_number
-        }))
-      });
+      console.warn(`⚠️ Could not find season ${seasonNumber}`);
       return;
     }
 
-    const correctSeasonNumber = currentSeason.season_number; // ✅ Always use `season_number`
+    const correctSeasonNumber = currentSeason.season_number;
     console.log(`✅ Found Correct Season: ${correctSeasonNumber}`);
 
-    // ✅ Extract Episode Number
     const episodeNumberMatch = episodeTitle.match(/\d+/);
     const episodeNumber = episodeNumberMatch ? parseInt(episodeNumberMatch[0]) : null;
 
@@ -3942,88 +3993,25 @@ async function playEpisode(seriesId, seasonNumber, episodeTitle, episodeUrl, sea
       const success = await markArabicEpisodeWatched(seriesId, correctSeasonNumber, episodeNumber);
 
       if (success) {
-        console.log(`✅ Successfully Marked Episode as Watched: S${correctSeasonNumber}E${episodeNumber}`);
+        console.log(`✅ Marked as Watched`);
 
-// ✅ Update Last Watched UI
-const lastWatchedText = document.getElementById("last-watched-arabic");
-if (lastWatchedText) {
-  const displaySeason = currentSeason.real_season_number ?? currentSeason.season_number; // Use real_season_number if available
-  lastWatchedText.textContent = `Last Watched: Season ${displaySeason} Episode ${episodeNumber}`;
-  lastWatchedText.style.opacity = "1";
-}
+        const lastWatchedText = document.getElementById("last-watched-arabic");
+        if (lastWatchedText) {
+          const displaySeason = currentSeason.real_season_number ?? currentSeason.season_number;
+          lastWatchedText.textContent = `Last Watched: Season ${displaySeason} Episode ${episodeNumber}`;
+          lastWatchedText.style.opacity = "1";
+        }
 
-
-        // ✅ Refresh Watched Episodes with `seasons`
         refreshWatchedEpisodes(seriesId, correctSeasonNumber, seasons);
       } else {
-        console.warn(`⚠️ Failed to Mark Episode as Watched: S${correctSeasonNumber}E${episodeNumber}`);
+        console.warn(`⚠️ Failed to mark watched`);
       }
     } else {
-      console.warn(`⚠️ Could not extract episode number from title: "${episodeTitle}"`);
+      console.warn(`⚠️ Could not extract episode number`);
     }
 
-    // ✅ Remove any existing overlay
-    const existingOverlay = document.getElementById("fullscreen-overlay");
-    if (existingOverlay) existingOverlay.remove();
-
-    // ✅ Create Fullscreen Overlay
-    const fullscreenOverlay = document.createElement("div");
-    fullscreenOverlay.id = "fullscreen-overlay";
-    fullscreenOverlay.style.position = "fixed";
-    fullscreenOverlay.style.left = "0";
-    fullscreenOverlay.style.top = "0";
-    fullscreenOverlay.style.width = "100%";
-    fullscreenOverlay.style.height = "100%";
-    fullscreenOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.9)";
-    fullscreenOverlay.style.zIndex = "1000";
-    fullscreenOverlay.style.display = "flex";
-    fullscreenOverlay.style.alignItems = "center";
-    fullscreenOverlay.style.justifyContent = "center";
-    fullscreenOverlay.style.overflow = "hidden";
-
-    // ✅ Create iFrame for Video Playback
-    const iframe = document.createElement("iframe");
-    iframe.src = watchServerUrl;
-    iframe.style.width = "100%";
-    iframe.style.height = "100%";
-    iframe.style.border = "none";
-    iframe.allow = "autoplay; encrypted-media";
-    iframe.allowFullscreen = true;
-    fullscreenOverlay.appendChild(iframe);
-
-    // ✅ Close Button
-    const closeButton = document.createElement("button");
-    closeButton.textContent = "Close";
-    closeButton.style.position = "absolute";
-    closeButton.style.top = "20px";
-    closeButton.style.right = "20px";
-    closeButton.style.fontSize = "20px";
-    closeButton.style.color = "#fff";
-    closeButton.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-    closeButton.style.border = "none";
-    closeButton.style.padding = "10px";
-    closeButton.style.cursor = "pointer";
-    closeButton.addEventListener("click", () => fullscreenOverlay.remove());
-    fullscreenOverlay.appendChild(closeButton);
-
-    // ✅ Next Episode Button
-    let nextEpisodeBtn = document.createElement("button");
-    nextEpisodeBtn.id = "arabic-next-episode";
-    nextEpisodeBtn.textContent = "▶ Next Episode";
-    nextEpisodeBtn.classList.add("ar-next-episode-btn");
-    nextEpisodeBtn.style.position = "absolute";
-    nextEpisodeBtn.style.fontSize = "18px";
-    nextEpisodeBtn.style.color = "#fff";
-    nextEpisodeBtn.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-    nextEpisodeBtn.style.border = "none";
-    nextEpisodeBtn.style.padding = "10px";
-    nextEpisodeBtn.style.cursor = "pointer";
-    fullscreenOverlay.appendChild(nextEpisodeBtn);
-
-    document.body.appendChild(fullscreenOverlay);
-
-    // ✅ Ensure Correct Season Matching
     setupArabicNextEpisodeButton(seriesId, correctSeasonNumber, episodeTitle, seasons);
+
   } catch (error) {
     console.error("❌ Error fetching episode URL:", error);
   }
