@@ -3264,18 +3264,6 @@ app.get('/api/movie/:id/backdrop', async (req, res) => {
 
 ///////////////////////////////// Route to get Arabic series from arabic_series.json  //////////////////////////////////////////////////////////////////////////////
 
-// Route to serve Arabic series data from arabic_series.json
-app.get('/api/arabic-series', (req, res) => {
-  fs.readFile(path.join(__dirname, 'data', 'arabic_series.json'), 'utf-8', (err, data) => {
-    if (err) {
-      console.error('Error reading Arabic series data:', err);
-      res.status(500).json({ message: 'Error reading Arabic series data', error: err.message });
-    } else {
-      res.json(JSON.parse(data));
-    }
-  });
-});
-
 // Helper function to remove year from title
 function removeYearFromTitle(title) {
   return title.replace(/\(\d{4}\)/, '').trim();
