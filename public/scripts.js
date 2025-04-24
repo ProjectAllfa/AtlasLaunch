@@ -592,7 +592,7 @@ function displayMovies(moviesData, query, container) {
   if (!moviesData || moviesData.length === 0) return;
 
   const filteredMovies = moviesData.filter(movie => {
-    const title = (movie.info.title || '').toLowerCase();
+    const title = (movie.movie_name || '').toLowerCase();
     return title.includes(query);
   });
 
@@ -4066,7 +4066,7 @@ async function displayArabicMoviesList() {
       moviesData.forEach(movie => {
         const movieId = movie.id; // Extract TMDB ID from the root
         const moviePoster = movie.info.poster || 'default-poster.jpg'; // Example poster
-        const movieTitle = movie.info.title || 'Unknown Movie';
+        const movieTitle = movie.movie_name || 'Unknown Movie';
 
         const movieElement = document.createElement('div');
         movieElement.classList.add('movie-item');
@@ -4309,7 +4309,7 @@ async function displayLocalFeaturedMovie(moviesData) {
   }
 
   // Remove the year (whether in parentheses or standalone) and "مشاهدة فيلم" from the movie title
-  const movieTitle = selectedMovie.info.title
+  const movieTitle = selectedMovie.movie_name
     .replace(/\s?\(\d{4}\)$/, '')  // Remove year in parentheses (e.g. (2024))
     .replace(/\s?\d{4}$/, '')      // Remove standalone year (e.g. 2024)
     .replace('مشاهدة فيلم', '');    // Remove "مشاهدة فيلم" phrase
@@ -4426,7 +4426,7 @@ async function openModalFromTMDB(movieId) {
       console.log('✅ Found Arabic Movie:', arabicMovie);
 
       // ✅ Get Arabic Title (from Arabic JSON or fallback to TMDb)
-      let arabicTitle = arabicMovie.info.title || movieData.title;
+      let arabicTitle = arabicMovie.movie_name || movieData.title;
 
       // ✅ Remove unwanted prefixes ("مشاهدة فيلم", "مشاهدة مسلسل", etc.)
       const phrasesToRemove = ["مشاهدة فيلم", "مشاهدة مسلسل", "فيلم", "مسلسل"];
