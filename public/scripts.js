@@ -2548,72 +2548,64 @@ document.body.appendChild(fullscreenOverlay);
 
 
 
-// Fetch the trailer URL from TMDb
-fetch(`/api/media/${mediaType}/${item.id}/trailer`)
-  .then(response => response.json())
-  .then(data => {
-    if (data && data.youtube_trailer) {
-      const trailerUrl = `https://www.youtube.com/embed/${data.youtube_trailer}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3&fs=0&showinfo=0&disablekb=1`;
 
-      // Replace placeholder with Plyr video player and mute button
-      trailerDiv.innerHTML = `
-        <div class="plyr__video-embed" id="ar-player" style="opacity: 0; transition: opacity 0.5s ease;">
-          <iframe
-            src="${trailerUrl}"
-            allow="autoplay; encrypted-media"
-            allowfullscreen>
-          </iframe>
-        </div>
-        <button id="ar-mute-button" class="ar-mute-button" style="opacity: 0; transition: opacity 0.5s ease;">
-          <i id="ar-mute-icon" class="fa fa-volume-up"></i>
-        </button>
-      `;
+ // Fetch the trailer URL from TMDb
+ fetch(`/api/media/${mediaType}/${item.id}/trailer`)
+     .then(response => response.json())
+     .then(data => {
+         if (data && data.youtube_trailer) {
+             const trailerUrl = `https://www.youtube.com/embed/${data.youtube_trailer}?autoplay=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3&fs=0&showinfo=0&disablekb=1`;
 
-      const trailerContainerDiv = document.getElementById("ar-player");
-      const muteButton = document.getElementById("ar-mute-button");
-      const muteIcon = document.getElementById("ar-mute-icon");
+             // Replace placeholder with Plyr video player
+             trailerDiv.innerHTML = `
+               <div class="plyr__video-embed" id="player">
+                 <iframe
+                   src="${trailerUrl}"
+                   allow="autoplay; encrypted-media"
+                   allowfullscreen>
+                 </iframe>
+               </div>
+                 <button id="mute-button" class="mute-button">
+        <i id="mute-icon" class="fa fa-volume-up"></i> <!-- Add an icon for mute -->
+    </button>
+             `;
 
-      // Initialize Plyr instance
-      currentPlayer = new Plyr('#ar-player', {
-        controls: [],
-        autoplay: true,
-        muted: false,
-        loop: { active: false },
-        fullscreen: false,
-        clickToPlay: false,
-        disableContextMenu: true,
-        cc_load_policy: 0,
+             // Initialize Plyr
+             currentPlayer = new Plyr('#player', {
+                 controls: [], // Hide all controls
+                 autoplay: true,
+                 muted: false,
+                 loop: { active: false },
+                 fullscreen: false,
+                 clickToPlay: false, // Prevent pausing by click
+                 disableContextMenu: true, // Disable right-click context menu
+                 cc_load_policy: 0,  // Try disabling CC
+             });
+
+
+                  // ✅ Listen for when the video ends and remove it
+        currentPlayer.on('ended', () => {
+          console.log("🎬 Trailer finished playing. Removing video...");
+          trailerDiv.innerHTML = `<div class="poster-placeholder" style="background-image: url('${backdropUrl}');"></div>`;
       });
 
-      // Show video & mute button once video is playing
-      currentPlayer.on('playing', () => {
-        trailerContainerDiv.style.opacity = "1";
-        muteButton.style.opacity = "1";
+           
+            // Get the mute button and icon
+            const muteButton = document.getElementById('mute-button');
+            const muteIcon = document.getElementById('mute-icon');
 
-        // Optional: auto-unmute if needed
-        if (currentPlayer.muted) {
-          currentPlayer.muted = false;
-        }
-      });
-
-      // Remove video when it ends
-      currentPlayer.on('ended', () => {
-        console.log("🎬 Trailer finished playing. Removing video...");
-        trailerDiv.innerHTML = `<div class="poster-placeholder" style="background-image: url('${backdropUrl}');"></div>`;
-      });
-
-      // Mute button toggle
-      muteButton.addEventListener('click', function () {
-        if (currentPlayer.muted) {
-          currentPlayer.muted = false;
-          muteIcon.classList.remove('fa-volume-mute');
-          muteIcon.classList.add('fa-volume-up');
-        } else {
-          currentPlayer.muted = true;
-          muteIcon.classList.remove('fa-volume-up');
-          muteIcon.classList.add('fa-volume-mute');
-        }
-      });
+            // Add the event listener to toggle mute state
+            muteButton.addEventListener('click', function() {
+                if (currentPlayer.muted) {
+                    currentPlayer.muted = false; // Unmute
+                    muteIcon.classList.remove('fa-volume-mute');
+                    muteIcon.classList.add('fa-volume-up');
+                } else {
+                    currentPlayer.muted = true; // Mute
+                    muteIcon.classList.remove('fa-volume-up');
+                    muteIcon.classList.add('fa-volume-mute');
+                }
+});
                
 
          } else {
