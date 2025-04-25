@@ -1736,6 +1736,15 @@ fetch('/api/documentary')
 
       document.body.classList.add('modal-open');
 
+  // Force focus on the modal to enable keyboard/remote navigation inside it
+  const firstFocusableElement = modal.querySelector('button, [href], input, select, textarea'); // Select the first focusable element
+  if (firstFocusableElement) {
+    firstFocusableElement.focus();
+  }
+
+  // Listen for arrow key navigation while the modal is open
+  document.addEventListener('keydown', handleArrowKeys);
+
      
 // Determine if the item is a TV show or movie
 const mediaType = item.title ? 'movie' : 'tv';
@@ -2641,6 +2650,9 @@ document.body.appendChild(fullscreenOverlay);
       // ✅ Re-enable scrolling when the modal is closed
       document.body.classList.remove('modal-open');
 
+       // Remove the arrow key event listener when modal is closed
+       document.removeEventListener('keydown', handleArrowKeys);
+
   });
 
 }
@@ -2695,6 +2707,15 @@ document.addEventListener("DOMContentLoaded", function() {
       arrow.classList.remove("flipped"); // Remove the flipped class on selection
   });
 });
+
+// Listen for arrow key navigation while the modal is open
+function handleArrowKeys(event) {
+  // Prevent arrow keys from affecting the page scroll or navigation
+  if (event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    event.preventDefault();
+  }
+}
+
 
 //////////////////////////////////////////////////////////// arabic series  /////////////////////////////////////////////////////////////////////////////
 
