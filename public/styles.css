@@ -1507,7 +1507,7 @@ body.modal-open {
   margin: auto;
   padding-bottom: 20px;
   width: 100%;
-  max-width: 45vw;
+  max-width: 50vw;
   background-color: #222;
   color: white;
   border-radius: 10px;
@@ -4175,6 +4175,7 @@ button[data-type="view-all"]:hover {
    height: 100vh; /* Full height for the modal */
    max-height: 100vh; /* Limit the height to viewport height */
    overflow-y: auto; /* Allow scrolling if content exceeds the height */
+   max-width: 100vw;
   }
 
   .poster-placeholder {
