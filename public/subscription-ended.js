@@ -9,7 +9,7 @@ window.addEventListener('scroll', function() {
 
 
 function goHome() {
-  window.location.href = 'https://www.cimaway.com/'; // Replace 'index.html' with your home page URL
+  window.location.href = '/'; // Replace 'index.html' with your home page URL
 }
 
 // Log out function for expired users
