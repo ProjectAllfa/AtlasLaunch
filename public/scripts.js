@@ -2573,13 +2573,18 @@ document.body.appendChild(fullscreenOverlay);
              currentPlayer = new Plyr('#player', {
                  controls: [], // Hide all controls
                  autoplay: true,
-                 muted: false,
+                 muted: true, // ✅ initially muted to allow autoplay on mobile
                  loop: { active: false },
                  fullscreen: false,
                  clickToPlay: false, // Prevent pausing by click
                  disableContextMenu: true, // Disable right-click context menu
                  cc_load_policy: 0,  // Try disabling CC
              });
+
+           // ✅ Unmute after 3 seconds
+              setTimeout(() => {
+              currentPlayer.muted = false;
+            }, 3000);
 
                   // ✅ Listen for when the video ends and remove it
         currentPlayer.on('ended', () => {
