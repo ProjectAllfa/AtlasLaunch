@@ -1,4 +1,55 @@
+//////////////////////////////////////////////////////////////// ADD TO HOME PROMPT MODAL ///////////////////////////////////////////////////////////////////////////////////
 
+window.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('add_to_home_prompt') === 'true') {
+    showAddToHomeModal();
+  }
+});
+
+function showAddToHomeModal() {
+  const modal = document.createElement('div');
+  modal.classList.add('cimaway-add-home-overlay');
+  modal.innerHTML = `
+    <div class="cimaway-add-home-modal">
+      <span class="cimaway-add-home-close">&times;</span>
+      <i class="fas fa-mobile-alt cimaway-add-home-icon"></i>
+      <h2 class="cimaway-add-home-title">ADD TO HOME SCREEN</h2>
+      <p class="cimaway-add-home-gray">
+      In Safari, tap the 
+      <span class="cimaway-share-icon-svg"></span> 
+      button and choose
+      </p>
+      <p class="cimaway-add-home-white">"Add To Home Screen"</p>
+      <p class="cimaway-add-home-sub">
+        You'll now be able to use Cimaway on your iPhone with 1 tap.
+      </p>
+      <img src="/images/addtohomelogo.png" alt="Cimaway Logo" class="cimaway-add-home-logo">
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  // Disable background scrolling
+  document.body.classList.add('modal-open');
+
+  // Attach event listener to the close button
+  const closeButton = modal.querySelector('.cimaway-add-home-close');
+  closeButton.addEventListener('click', closeModal);
+
+  // Clean URL
+  if (window.history.replaceState) {
+    const cleanURL = window.location.origin + window.location.pathname;
+    window.history.replaceState({}, document.title, cleanURL);
+  }
+}
+
+// Close modal and enable background scrolling
+function closeModal() {
+  document.querySelector('.cimaway-add-home-overlay').remove();
+  document.body.classList.remove('modal-open');
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 window.addEventListener('scroll', function() {
   const header = document.querySelector('header');
