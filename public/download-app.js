@@ -11,4 +11,10 @@ window.addEventListener('scroll', function() {
  function goHome() {
   window.location.href = '/'; // Replace 'index.html' with your home page URL
 }
+
+  
+  function redirectToHomeWithPrompt() {
+    window.location.href = '/?add_to_home_prompt=true';
+  }
+  
   
