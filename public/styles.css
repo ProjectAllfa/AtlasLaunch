@@ -1335,7 +1335,7 @@ header {
 
 .movie-card {
   position: relative;  /* Allow absolute positioning of the logo */
-  width: 15vw /* Increased width for larger movie cards */
+  width: 15vw; /* Increased width for larger movie cards */
   height: 50vh; /* Set height to ensure consistent size */
   margin-right: 10px;
   flex-shrink: 0;
