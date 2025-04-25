@@ -1736,6 +1736,21 @@ fetch('/api/documentary')
 
       document.body.classList.add('modal-open');
 
+   document.body.style.pointerEvents = 'none';  // Disable body interaction
+
+      
+  // Enable pointer events for the modal itself
+  modal.style.pointerEvents = 'auto';  // Enable modal interaction
+
+  // Collect all focusable elements inside the modal and trap focus (if needed)
+  const focusables = Array.from(modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+    .filter(el => !el.disabled);
+  
+  // Optionally, focus the first element
+  if (focusables.length > 0) {
+    focusables[0].focus();
+  }
+
 
 // Determine if the item is a TV show or movie
 const mediaType = item.title ? 'movie' : 'tv';
@@ -2640,6 +2655,8 @@ document.body.appendChild(fullscreenOverlay);
       
       // ✅ Re-enable scrolling when the modal is closed
       document.body.classList.remove('modal-open');
+       document.body.style.pointerEvents = '';  // Re-enable body interaction
+       modal.style.pointerEvents = '';  // Disable modal interaction
 
   });
 
