@@ -2554,7 +2554,7 @@ document.body.appendChild(fullscreenOverlay);
      .then(response => response.json())
      .then(data => {
          if (data && data.youtube_trailer) {
-             const trailerUrl = `https://www.youtube.com/embed/${data.youtube_trailer}?autoplay=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3&fs=0&showinfo=0&disablekb=1`;
+             const trailerUrl = `https://www.youtube.com/embed/${data.youtube_trailer}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3&fs=0&showinfo=0&disablekb=1`;
 
              // Replace placeholder with Plyr video player
              trailerDiv.innerHTML = `
@@ -2574,7 +2574,7 @@ document.body.appendChild(fullscreenOverlay);
              currentPlayer = new Plyr('#player', {
                  controls: [], // Hide all controls
                  autoplay: true,
-                 muted: false,
+                 muted: true,
                  loop: { active: false },
                  fullscreen: false,
                  clickToPlay: false, // Prevent pausing by click
