@@ -1746,16 +1746,6 @@ console.log(`📌 Opened Modal - TMDB ID: ${item.id} Type: ${mediaType}`);
 const moviePlayButton = document.getElementById('play-button');
 const seriesPlayButton = document.getElementById('series-play-button');
 
- // Focus on the first available play button
-  if (moviePlayButton && moviePlayButton.offsetParent !== null) {
-    moviePlayButton.focus();
-  } else if (seriesPlayButton && seriesPlayButton.offsetParent !== null) {
-    seriesPlayButton.focus();
-  }
-
-  // Trap focus within the modal
-  modal.addEventListener('keydown', trapFocus);
-
 // ✅ Toggle visibility of last watched text & play buttons
 if (mediaType === 'movie') {
     lastWatchedText.style.opacity = "0"; // ✅ Hide last watched for movies
@@ -2706,32 +2696,6 @@ document.addEventListener("DOMContentLoaded", function() {
       arrow.classList.remove("flipped"); // Remove the flipped class on selection
   });
 });
-
-
-// Trap focus within the modal
-function trapFocus(event) {
-  const modal = document.querySelector('.modal');
-  const focusableElements = modal.querySelectorAll('button, a, input, select, textarea, span');
-  const firstFocusableElement = focusableElements[0];
-  const lastFocusableElement = focusableElements[focusableElements.length - 1];
-
-  // If Tab is pressed
-  if (event.key === 'Tab') {
-    // If Shift+Tab is pressed and we're on the first focusable element, loop to the last one
-    if (event.shiftKey) {
-      if (document.activeElement === firstFocusableElement) {
-        lastFocusableElement.focus();
-        event.preventDefault();
-      }
-    } else {
-      // If Tab is pressed and we're on the last focusable element, loop to the first one
-      if (document.activeElement === lastFocusableElement) {
-        firstFocusableElement.focus();
-        event.preventDefault();
-      }
-    }
-  }
-}
 
 //////////////////////////////////////////////////////////// arabic series  /////////////////////////////////////////////////////////////////////////////
 
