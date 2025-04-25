@@ -1425,7 +1425,7 @@ body.modal-open {
   margin: auto;
   padding-bottom: 20px;
   width: 100%;
-  max-width: 900px;
+  max-width: 45vw;
   background-color: #222;
   color: white;
   border-radius: 10px;
