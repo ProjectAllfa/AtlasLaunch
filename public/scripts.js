@@ -2584,32 +2584,6 @@ fetch(`/api/media/${mediaType}/${item.id}/trailer`)
         cc_load_policy: 0,  // Try disabling CC
       });
 
-      // ✅ Listen for when the video ends and remove it
-      currentPlayer.on('ended', () => {
-        console.log("🎬 Trailer finished playing. Removing video...");
-        trailerDiv.innerHTML = `<div class="poster-placeholder" style="background-image: url('${backdropUrl}');"></div>`;
-      });
-
-      // Get the mute button and icon
-      const muteButton = document.getElementById('mute-button');
-      const muteIcon = document.getElementById('mute-icon');
-
-      // Add the event listener to toggle mute state
-      muteButton.addEventListener('click', function () {
-        if (currentPlayer.muted) {
-          currentPlayer.muted = false; // Unmute
-          muteIcon.classList.remove('fa-volume-mute');
-          muteIcon.classList.add('fa-volume-up');
-        } else {
-          currentPlayer.muted = true; // Mute
-          muteIcon.classList.remove('fa-volume-up');
-          muteIcon.classList.add('fa-volume-mute');
-        }
-      });
-    }
-  });
-
-
 
                   // ✅ Listen for when the video ends and remove it
         currentPlayer.on('ended', () => {
