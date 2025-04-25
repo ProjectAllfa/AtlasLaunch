@@ -3528,22 +3528,6 @@ button[data-type="view-all"]:hover {
   }
 }
 
-/* For medium screens (768px to 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .movie-card {
-    width: calc(33.33% - 10px) !important; /* Slightly larger cards, more space */
-    height: auto !important; /* Auto height to maintain aspect ratio */
-  }
-
-  .movie-section {
-    padding-left: 20px; /* Adjust padding for tablets */
-  }
-
-  .movie-row {
-    gap: 8px; /* Adjust gap for medium screens */
-  }
-}
-
 /*/////////////////////////////////////////////////////// Media Query Arabic/Turkish Series Section ///////////////////////////////////////////////////////////////////////////////////////////*/
 
 /* For small screens (up to 768px) */
@@ -3574,21 +3558,6 @@ button[data-type="view-all"]:hover {
     object-fit: cover !important;
   }
 }
-
-/* For medium screens (768px to 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
-  /* Arabic Series Section */
-  #arabic-series {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    height: auto;
-    width: max-content;
-    gap: 8px; /* Adjust gap for medium screens */
-    padding: 0 20px; /* Adjust padding for tablets */
-  }
 
   /* Arabic Series Item */
   .series-item {
@@ -3631,13 +3600,6 @@ button[data-type="view-all"]:hover {
   }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-  #arabic-movies {
-    width: 100vw !important;
-    display: flex;
-    flex-wrap: nowrap;
-    
-  }
 
   #arabic-movies > div {
     width: calc(33.33vw - 10px) !important;
@@ -3670,17 +3632,6 @@ button[data-type="view-all"]:hover {
   }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-  .more-results-container {
-    margin-top: 0px;     /* Slightly larger for tablets */
-    margin-left: 10px;     /* Medium left margin */
-  }
-
-  .row {
-    gap: 0px;
-    margin-bottom: 20px;
-  }
-}
 
 /*/////////////////////////////////////////////////////// Media Query Movies/TV Shows section (in nav) ///////////////////////////////////////////////////////////////////////////////////////////*/
 
