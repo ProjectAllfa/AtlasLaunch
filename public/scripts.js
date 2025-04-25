@@ -1694,16 +1694,6 @@ fetch('/api/documentary')
 
 ///////////////////////////////// OPEN MODAL FUNCTION MAIN //////////////////////////////
 
-
-// Function to handle arrow keys and prevent default scroll behavior
-function handleArrowKeys(event) {
-  // Prevent arrow keys from affecting the page scroll or navigation
-  if (event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-    event.preventDefault();
-  }
-}
-
-
   function openModal(item, isFromTMDB = false) {
     const modal = document.getElementById('movie-modal');
     const title = item.title || item.name;
@@ -1745,10 +1735,6 @@ function handleArrowKeys(event) {
 
 
       document.body.classList.add('modal-open');
-
-      // ADDED NEW Listen for arrow key navigation while the modal is open
-      document.addEventListener('keydown', handleArrowKeys);
-
 
      
 // Determine if the item is a TV show or movie
@@ -2654,9 +2640,6 @@ document.body.appendChild(fullscreenOverlay);
       
       // ✅ Re-enable scrolling when the modal is closed
       document.body.classList.remove('modal-open');
-
-       // ADDED NEW Remove the arrow key event listener when modal is closed
-       document.removeEventListener('keydown', handleArrowKeys);
 
   });
 
