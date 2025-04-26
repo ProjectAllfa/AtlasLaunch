@@ -2732,61 +2732,19 @@ function formatDuration(minutes) {
   return `${hours}h ${mins}m`;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function() {
   const seasonDropdown = document.getElementById("season-dropdown");
   const arrow = document.querySelector(".arrow");
 
-  // allow remote key events
-  seasonDropdown.tabIndex = 0;
-
-  let isOpen = false;
-  let tempIndex = seasonDropdown.selectedIndex;
-
-  // Handle remote keys
-  seasonDropdown.addEventListener("keydown", (e) => {
-    const key = e.key || e.keyCode;
-    const max = seasonDropdown.options.length - 1;
-
-    // ENTER / OK
-    if (key === "Enter" || key === 13) {
-      e.preventDefault();
-      if (!isOpen) {
-        // OPEN the dropdown
-        isOpen = true;
-        tempIndex = seasonDropdown.selectedIndex;
-        arrow.classList.add("flipped");
-      } else {
-        // COMMIT selection
-        seasonDropdown.selectedIndex = tempIndex;
-        seasonDropdown.dispatchEvent(new Event("change", { bubbles: true }));
-        // CLOSE
-        seasonDropdown.blur();
-      }
-    }
-
-    // DOWN
-    else if ((key === "ArrowDown" || key === 40) && isOpen) {
-      e.preventDefault();
-      tempIndex = Math.min(max, tempIndex + 1);
-      seasonDropdown.selectedIndex = tempIndex;
-    }
-
-    // UP
-    else if ((key === "ArrowUp" || key === 38) && isOpen) {
-      e.preventDefault();
-      tempIndex = Math.max(0, tempIndex - 1);
-      seasonDropdown.selectedIndex = tempIndex;
-    }
+  seasonDropdown.addEventListener("click", function() {
+      arrow.classList.toggle("flipped"); // Toggle the flipped class on click
   });
 
-  // Whenever it loses focus, ensure we mark it closed
-  seasonDropdown.addEventListener("blur", () => {
-    isOpen = false;
-    arrow.classList.remove("flipped");
+  // Optional: If you want the arrow to revert back when an option is selected
+  seasonDropdown.addEventListener("change", function() {
+      arrow.classList.remove("flipped"); // Remove the flipped class on selection
   });
 });
-
-
 
 
 //////////////////////////////////////////////////////////// arabic series  /////////////////////////////////////////////////////////////////////////////
