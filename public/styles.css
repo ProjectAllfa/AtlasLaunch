@@ -1537,31 +1537,21 @@ body.modal-open {
   border-radius: 4px;
   padding: 10px;
   font-size: 16px;
-
-  /* ✅ Removed problematic lines for Smart TVs */
-  /* appearance: none; */
-  /* outline: none; */
-  /* cursor: pointer; */
-
+  appearance: none; /* Remove default styling */
+  outline: none; /* Remove outline */
+  cursor: pointer;
   transition: background-color 0.3s ease;
-  padding-right: 30px; /* Space for the arrow */
-}
-
-/* ✅ Focus style to help keyboard/TV navigation */
-#season-dropdown:focus {
-  outline: 2px solid #888;
-  outline-offset: 2px;
+  padding-right: 30px; /* Add padding to accommodate the arrow */
 }
 
 #season-dropdown:hover {
-  background-color: #444;
+  background-color: #444; /* Darker on hover */
 }
 
 #season-dropdown option {
-  background-color: #333;
-  color: #ffffff;
+  background-color: #333; /* Dropdown options background */
+  color: #ffffff; /* Option text color */
 }
-
 
 .arrow {
   position: absolute;
