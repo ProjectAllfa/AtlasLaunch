@@ -2732,54 +2732,59 @@ function formatDuration(minutes) {
   return `${hours}h ${mins}m`;
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
   const seasonDropdown = document.getElementById("season-dropdown");
   const arrow = document.querySelector(".arrow");
 
-  // State for whether popup is open, and which index is highlighted
-  let dropdownOpen = false;
-  let highlightIndex = seasonDropdown.selectedIndex;
-
-  // Make sure it can get focus (for keydown)
+  // allow key events
   seasonDropdown.tabIndex = 0;
 
-  // 1) Toggle open/closed on click (OK on TV)
-  seasonDropdown.addEventListener("click", () => {
-    dropdownOpen = !dropdownOpen;
-    arrow.classList.toggle("flipped");
-    if (dropdownOpen) {
-      // sync highlight to current selection when opening
-      highlightIndex = seasonDropdown.selectedIndex;
-    }
+  // track open state & temp index
+  let isOpen = false;
+  let tempIndex = seasonDropdown.selectedIndex;
+
+  // When the <select> gets focus, consider it “open”
+  seasonDropdown.addEventListener("focus", () => {
+    isOpen = true;
+    arrow.classList.add("flipped");
+    tempIndex = seasonDropdown.selectedIndex;
   });
 
-  // 2) Key handling: up/down to move highlight; Enter to commit
+  // When it loses focus, it’s closed
+  seasonDropdown.addEventListener("blur", () => {
+    isOpen = false;
+    arrow.classList.remove("flipped");
+  });
+
+  // Arrow keys only work when open
   seasonDropdown.addEventListener("keydown", (e) => {
-    const len = seasonDropdown.options.length;
-    // DOWN = 40, UP = 38
-    if ((e.keyCode === 40 || e.keyCode === 38) && dropdownOpen) {
+    if (!isOpen) return;
+
+    const max = seasonDropdown.options.length - 1;
+
+    if (e.key === "ArrowDown" || e.keyCode === 40) {
       e.preventDefault();
-      const dir = e.keyCode === 40 ? 1 : -1;
-      highlightIndex = Math.max(0, Math.min(len - 1, highlightIndex + dir));
-      // move the visible highlight—does NOT fire `change`
-      seasonDropdown.selectedIndex = highlightIndex;
+      tempIndex = Math.min(max, tempIndex + 1);
+      seasonDropdown.selectedIndex = tempIndex;
     }
-    // ENTER = 13
-    else if (e.keyCode === 13 && dropdownOpen) {
+    else if (e.key === "ArrowUp" || e.keyCode === 38) {
       e.preventDefault();
-      // now commit the selection
+      tempIndex = Math.max(0, tempIndex - 1);
+      seasonDropdown.selectedIndex = tempIndex;
+    }
+    else if (e.key === "Enter" || e.keyCode === 13) {
+      e.preventDefault();
+      // fire your existing change handler
       seasonDropdown.dispatchEvent(new Event("change", { bubbles: true }));
-      // close it
-      dropdownOpen = false;
-      arrow.classList.remove("flipped");
-      seasonDropdown.blur(); // native popup will close
+      // close the popup
+      seasonDropdown.blur();
     }
   });
 
-  // 3) Clean up arrow if anything else changes it
+  // Keep arrow in sync if something else triggers change
   seasonDropdown.addEventListener("change", () => {
     arrow.classList.remove("flipped");
-    dropdownOpen = false;
+    isOpen = false;
   });
 });
 
