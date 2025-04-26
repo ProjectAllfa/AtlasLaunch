@@ -2736,15 +2736,35 @@ document.addEventListener("DOMContentLoaded", function() {
   const seasonDropdown = document.getElementById("season-dropdown");
   const arrow = document.querySelector(".arrow");
 
+  // Toggle arrow on click
   seasonDropdown.addEventListener("click", function() {
-      arrow.classList.toggle("flipped"); // Toggle the flipped class on click
+    arrow.classList.toggle("flipped");
   });
 
-  // Optional: If you want the arrow to revert back when an option is selected
+  // Remove flipped arrow on selection
   seasonDropdown.addEventListener("change", function() {
-      arrow.classList.remove("flipped"); // Remove the flipped class on selection
+    arrow.classList.remove("flipped");
+  });
+
+  // Ensure the select can receive focus for key events
+  seasonDropdown.tabIndex = 0;
+
+  // NEW: intercept remote up/down keys
+  seasonDropdown.addEventListener("keydown", function(e) {
+    // 38 = up, 40 = down
+    if (e.keyCode === 38 || e.keyCode === 40) {
+      e.preventDefault();
+      const dir = e.keyCode === 40 ? 1 : -1;
+      let idx = seasonDropdown.selectedIndex + dir;
+      // clamp between first and last option
+      idx = Math.max(0, Math.min(seasonDropdown.options.length - 1, idx));
+      seasonDropdown.selectedIndex = idx;
+      // re‐fire change so your episode loader runs
+      seasonDropdown.dispatchEvent(new Event("change"));
+    }
   });
 });
+
 
 //////////////////////////////////////////////////////////// arabic series  /////////////////////////////////////////////////////////////////////////////
 
