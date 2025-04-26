@@ -2736,32 +2736,50 @@ document.addEventListener("DOMContentLoaded", function() {
   const seasonDropdown = document.getElementById("season-dropdown");
   const arrow = document.querySelector(".arrow");
 
-  // Toggle arrow on click
-  seasonDropdown.addEventListener("click", function() {
-    arrow.classList.toggle("flipped");
-  });
+  // State for whether popup is open, and which index is highlighted
+  let dropdownOpen = false;
+  let highlightIndex = seasonDropdown.selectedIndex;
 
-  // Remove flipped arrow on selection
-  seasonDropdown.addEventListener("change", function() {
-    arrow.classList.remove("flipped");
-  });
-
-  // Ensure the select can receive focus for key events
+  // Make sure it can get focus (for keydown)
   seasonDropdown.tabIndex = 0;
 
-  // NEW: intercept remote up/down keys
-  seasonDropdown.addEventListener("keydown", function(e) {
-    // 38 = up, 40 = down
-    if (e.keyCode === 38 || e.keyCode === 40) {
+  // 1) Toggle open/closed on click (OK on TV)
+  seasonDropdown.addEventListener("click", () => {
+    dropdownOpen = !dropdownOpen;
+    arrow.classList.toggle("flipped");
+    if (dropdownOpen) {
+      // sync highlight to current selection when opening
+      highlightIndex = seasonDropdown.selectedIndex;
+    }
+  });
+
+  // 2) Key handling: up/down to move highlight; Enter to commit
+  seasonDropdown.addEventListener("keydown", (e) => {
+    const len = seasonDropdown.options.length;
+    // DOWN = 40, UP = 38
+    if ((e.keyCode === 40 || e.keyCode === 38) && dropdownOpen) {
       e.preventDefault();
       const dir = e.keyCode === 40 ? 1 : -1;
-      let idx = seasonDropdown.selectedIndex + dir;
-      // clamp between first and last option
-      idx = Math.max(0, Math.min(seasonDropdown.options.length - 1, idx));
-      seasonDropdown.selectedIndex = idx;
-      // re‐fire change so your episode loader runs
-      seasonDropdown.dispatchEvent(new Event("change"));
+      highlightIndex = Math.max(0, Math.min(len - 1, highlightIndex + dir));
+      // move the visible highlight—does NOT fire `change`
+      seasonDropdown.selectedIndex = highlightIndex;
     }
+    // ENTER = 13
+    else if (e.keyCode === 13 && dropdownOpen) {
+      e.preventDefault();
+      // now commit the selection
+      seasonDropdown.dispatchEvent(new Event("change", { bubbles: true }));
+      // close it
+      dropdownOpen = false;
+      arrow.classList.remove("flipped");
+      seasonDropdown.blur(); // native popup will close
+    }
+  });
+
+  // 3) Clean up arrow if anything else changes it
+  seasonDropdown.addEventListener("change", () => {
+    arrow.classList.remove("flipped");
+    dropdownOpen = false;
   });
 });
 
