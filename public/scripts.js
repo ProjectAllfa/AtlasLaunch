@@ -2736,57 +2736,57 @@ document.addEventListener("DOMContentLoaded", () => {
   const seasonDropdown = document.getElementById("season-dropdown");
   const arrow = document.querySelector(".arrow");
 
-  // allow key events
+  // allow remote key events
   seasonDropdown.tabIndex = 0;
 
-  // track open state & temp index
   let isOpen = false;
   let tempIndex = seasonDropdown.selectedIndex;
 
-  // When the <select> gets focus, consider it “open”
-  seasonDropdown.addEventListener("focus", () => {
-    isOpen = true;
-    arrow.classList.add("flipped");
-    tempIndex = seasonDropdown.selectedIndex;
-  });
-
-  // When it loses focus, it’s closed
-  seasonDropdown.addEventListener("blur", () => {
-    isOpen = false;
-    arrow.classList.remove("flipped");
-  });
-
-  // Arrow keys only work when open
+  // Handle remote keys
   seasonDropdown.addEventListener("keydown", (e) => {
-    if (!isOpen) return;
-
+    const key = e.key || e.keyCode;
     const max = seasonDropdown.options.length - 1;
 
-    if (e.key === "ArrowDown" || e.keyCode === 40) {
+    // ENTER / OK
+    if (key === "Enter" || key === 13) {
+      e.preventDefault();
+      if (!isOpen) {
+        // OPEN the dropdown
+        isOpen = true;
+        tempIndex = seasonDropdown.selectedIndex;
+        arrow.classList.add("flipped");
+      } else {
+        // COMMIT selection
+        seasonDropdown.selectedIndex = tempIndex;
+        seasonDropdown.dispatchEvent(new Event("change", { bubbles: true }));
+        // CLOSE
+        seasonDropdown.blur();
+      }
+    }
+
+    // DOWN
+    else if ((key === "ArrowDown" || key === 40) && isOpen) {
       e.preventDefault();
       tempIndex = Math.min(max, tempIndex + 1);
       seasonDropdown.selectedIndex = tempIndex;
     }
-    else if (e.key === "ArrowUp" || e.keyCode === 38) {
+
+    // UP
+    else if ((key === "ArrowUp" || key === 38) && isOpen) {
       e.preventDefault();
       tempIndex = Math.max(0, tempIndex - 1);
       seasonDropdown.selectedIndex = tempIndex;
     }
-    else if (e.key === "Enter" || e.keyCode === 13) {
-      e.preventDefault();
-      // fire your existing change handler
-      seasonDropdown.dispatchEvent(new Event("change", { bubbles: true }));
-      // close the popup
-      seasonDropdown.blur();
-    }
   });
 
-  // Keep arrow in sync if something else triggers change
-  seasonDropdown.addEventListener("change", () => {
-    arrow.classList.remove("flipped");
+  // Whenever it loses focus, ensure we mark it closed
+  seasonDropdown.addEventListener("blur", () => {
     isOpen = false;
+    arrow.classList.remove("flipped");
   });
 });
+
+
 
 
 //////////////////////////////////////////////////////////// arabic series  /////////////////////////////////////////////////////////////////////////////
