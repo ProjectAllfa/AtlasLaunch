@@ -1798,26 +1798,30 @@ const seriesPlayButton = document.getElementById('series-play-button');
 
 // ✅ Toggle visibility of last watched text & play buttons
 if (mediaType === 'movie') {
-    lastWatchedText.style.opacity = "0"; // ✅ Hide last watched for movies
-    moviePlayButton.style.display = "flex";  // ✅ Show movie play button
-    seriesPlayButton.style.display = "none"; // ❌ Hide series play button
+    lastWatchedText.style.opacity = "0"; 
+    moviePlayButton.style.display = "flex";  
+    seriesPlayButton.style.display = "none"; 
 
-    // 🛑 INSERT focus code here for MOVIES
     if (moviePlayButton) {
-      moviePlayButton.focus();
-  }
+        setTimeout(() => {
+            moviePlayButton.focus();
+        }, 2000); // ⏳ Delay 2 seconds
+    }
 
 } else if (mediaType === 'tv') {
-    lastWatchedText.style.opacity = "1"; // ✅ Ensure it's visible again for series
+    lastWatchedText.style.opacity = "1"; 
     console.log(`📌 Fetching last watched for TV ID: ${item.id}`);
     
-    moviePlayButton.style.display = "none";  // ❌ Hide movie play button
-    seriesPlayButton.style.display = "flex"; // ✅ Show series play button
+    moviePlayButton.style.display = "none";  
+    seriesPlayButton.style.display = "flex"; 
 
-      // 🛑 INSERT focus code here for SERIES
-      if (seriesPlayButton) {
-        seriesPlayButton.focus();
+    if (seriesPlayButton) {
+        setTimeout(() => {
+            seriesPlayButton.focus();
+        }, 2000); // ⏳ Delay 2 seconds
     }
+}
+
 
 
     // ✅ Fetch last watched episode for this series
