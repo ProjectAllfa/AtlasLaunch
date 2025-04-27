@@ -2822,6 +2822,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+
 function highlightSelectedButton(selectedButton) {
   const buttons = document.querySelectorAll('#season-dropdown .season-button');
   buttons.forEach(button => {
