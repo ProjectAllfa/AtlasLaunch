@@ -2107,6 +2107,14 @@ if (mediaType === 'tv') {
           console.error('Error fetching seasons data:', error);
           episodesContainer.innerHTML = '<p>Error fetching seasons data</p>';
       });
+ }  else {
+              episodesContainer.innerHTML = '<p>No seasons available</p>';
+          }
+      })
+      .catch(error => {
+          console.error('Error fetching seasons data:', error);
+          episodesContainer.innerHTML = '<p>Error fetching seasons data</p>';
+      });
  } else {
   
   seasonDropdown.style.display = 'none'; // Ensure dropdown is hidden
