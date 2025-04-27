@@ -2098,6 +2098,10 @@ if (mediaType === 'tv') {
 
               // ✅ Auto-select the first valid season
               seasonDropdown.value = filteredSeasons[0].season_number;
+
+              // ✅ Set focus on the dropdown (select element)
+              seasonDropdown.focus();
+
               displaySeasonEpisodes(tvId, filteredSeasons[0]);
           } else {
               episodesContainer.innerHTML = '<p>No seasons available</p>';
