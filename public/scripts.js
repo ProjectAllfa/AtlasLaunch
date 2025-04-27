@@ -2810,14 +2810,17 @@ document.addEventListener("DOMContentLoaded", function() {
       seasonButtonsContainer.style.display = 'none';
       arrow.classList.remove('flipped'); // Reset the arrow
       
-       // ✅ Focus the first episode after a season button is clicked
-    setTimeout(() => {
+    // ✅ Use MutationObserver to detect when the first episode appears
+    const observer = new MutationObserver((mutationsList, observer) => {
       const firstEpisodeItem = document.querySelector('.episode-item');
       if (firstEpisodeItem) {
-        firstEpisodeItem.setAttribute('tabindex', '-1'); // Make it focusable
+        firstEpisodeItem.setAttribute('tabindex', '-1');
         firstEpisodeItem.focus();
-       }
-      }, 50); // Small delay to ensure episodes are rendered first
+        observer.disconnect(); // Stop observing once we find it
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
     }
   });
 
