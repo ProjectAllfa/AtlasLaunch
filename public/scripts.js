@@ -2787,7 +2787,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const arrow = document.querySelector(".arrow");
 
   // Toggle showing/hiding the season buttons when clicking the dropdown
-  seasonDropdown.addEventListener('click', () => {
+  seasonDropdown.addEventListener('click', (event) => {
+    event.stopPropagation(); // Prevent the click event from bubbling up to the document
     if (seasonButtonsContainer.style.display === 'none' || seasonButtonsContainer.style.display === '') {
       seasonButtonsContainer.style.display = 'block';
       arrow.classList.add('flipped'); // Flip the arrow
@@ -2797,16 +2798,22 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // Optional: If you want the arrow to revert back when an option is selected
+  // Close the dropdown if a season button is clicked
   seasonButtonsContainer.addEventListener('click', (event) => {
     if (event.target && event.target.matches("button")) { // Make sure a season button was clicked
-      // Close the season dropdown and reset the arrow
       seasonButtonsContainer.style.display = 'none';
-      arrow.classList.remove('flipped');
+      arrow.classList.remove('flipped'); // Reset the arrow
+    }
+  });
+
+  // Close the dropdown if clicking anywhere outside the dropdown or season buttons container
+  document.addEventListener('click', (event) => {
+    if (!seasonDropdown.contains(event.target) && !seasonButtonsContainer.contains(event.target)) {
+      seasonButtonsContainer.style.display = 'none';
+      arrow.classList.remove('flipped'); // Reset the arrow
     }
   });
 });
-
 
 function highlightSelectedButton(selectedButton) {
   const buttons = document.querySelectorAll('#season-dropdown .season-button');
