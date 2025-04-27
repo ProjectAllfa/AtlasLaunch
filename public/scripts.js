@@ -2819,28 +2819,6 @@ document.addEventListener("DOMContentLoaded", function() {
       arrow.classList.remove('flipped'); // Reset the arrow
     }
   });
-
-  // Trap focus inside the season buttons container when the dropdown is open
-  seasonButtonsContainer.addEventListener('keydown', (event) => {
-    const buttons = Array.from(seasonButtonsContainer.querySelectorAll('button'));
-    const firstButton = buttons[0];
-    const lastButton = buttons[buttons.length - 1];
-
-    // Prevent Tab and Shift+Tab from moving focus outside the container
-    if (event.key === 'Tab') {
-      if (event.shiftKey) { // Shift + Tab
-        if (document.activeElement === firstButton) {
-          lastButton.focus(); // Focus last button if we are at the first button
-          event.preventDefault();
-        }
-      } else { // Tab
-        if (document.activeElement === lastButton) {
-          firstButton.focus(); // Focus first button if we are at the last button
-          event.preventDefault();
-        }
-      }
-    }
-  });
 });
 
 
