@@ -1820,7 +1820,6 @@ if (mediaType === 'movie') {
             seriesPlayButton.focus();
         }, 2000); // ⏳ Delay 2 seconds
     }
-}
 
 
 
