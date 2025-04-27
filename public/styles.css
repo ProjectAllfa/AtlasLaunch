@@ -1542,6 +1542,7 @@ body.modal-open {
   cursor: pointer;
   transition: background-color 0.3s ease;
   padding-right: 30px; /* Add padding to accommodate the arrow */
+  position: relative; /* Add this to position the dropdown button relative to the container */
 }
 
 #season-dropdown:hover {
@@ -1571,6 +1572,54 @@ body.modal-open {
 .flipped {
   transform: translateY(-50%) rotate(180deg); /* Flip the arrow */
 }
+
+.season-button {
+  padding: 6px 12px;
+  background-color: #222;
+  color: white;
+  border: 1px solid #555;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.season-button:hover {
+  background-color: #333;
+}
+
+.season-button.active {
+  background-color: #444;
+  border-color: #888;
+}
+
+#season-buttons-container {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-right: 20px;
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 100;
+  display: none;
+}
+
+#season-buttons-container button {
+  display: block;
+  width: 100%;
+  background-color: #222;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#season-buttons-container button:hover {
+  background-color: #333;
+}
+
 
 
 
