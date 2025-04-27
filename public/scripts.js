@@ -1941,27 +1941,32 @@ function playFirstEpisode(seriesId) {
   }
 
 
-// ✅ If it's a TV show, fetch and display total number of seasons (based on dropdown)
+
+// ✅ If it's a TV show, fetch and display total number of seasons (based on buttons)
 if (mediaType === 'tv') {
   // Wait until seasons are loaded in the dropdown
   const checkDropdown = setInterval(() => {
       const seasonDropdown = document.getElementById('season-dropdown');
 
-      if (seasonDropdown && seasonDropdown.options.length > 0) {
-          clearInterval(checkDropdown); // ✅ Stop checking once dropdown is ready
+      if (seasonDropdown) {
+          const seasonButtons = seasonDropdown.querySelectorAll('button'); // 🔥 Find all season buttons
+          
+          if (seasonButtons.length > 0) {
+              clearInterval(checkDropdown); // ✅ Stop checking once buttons are ready
 
-          const totalSeasons = seasonDropdown.options.length;
-          const seasonText = totalSeasons === 1 ? '1 Season' : `${totalSeasons} Seasons`;
+              const totalSeasons = seasonButtons.length;
+              const seasonText = totalSeasons === 1 ? '1 Season' : `${totalSeasons} Seasons`;
 
-          // ✅ Ensure we append to modalYearLanguage
-          const modalYearLanguage = document.getElementById('modal-year-language');
-          if (modalYearLanguage) {
-              modalYearLanguage.innerHTML += `  <span class="seasons-tag">${seasonText}</span>`;
-          } else {
-              console.warn("❌ modal-year-language element not found!");
+              // ✅ Ensure we append to modalYearLanguage
+              const modalYearLanguage = document.getElementById('modal-year-language');
+              if (modalYearLanguage) {
+                  modalYearLanguage.innerHTML += `  <span class="seasons-tag">${seasonText}</span>`;
+              } else {
+                  console.warn("❌ modal-year-language element not found!");
+              }
           }
       }
-  }, 100); // ✅ Check every 100ms until dropdown is ready
+  }, 100); // ✅ Check every 100ms until buttons are ready
 }
 
 
@@ -2021,7 +2026,6 @@ fetch(`/api/certification/${item.id}/${mediaType}`)
 
 // Hide or show season dropdown based on media type
 if (mediaType === 'tv') {
-  
   seasonDropdown.style.display = 'block'; // Ensure dropdown is visible
   episodesContainer.style.display = 'block'; // Ensure episodes container is visible
   arrow.style.display = 'inline-block'; // Show arrow for TV shows
@@ -2029,85 +2033,92 @@ if (mediaType === 'tv') {
   document.getElementById('play-button').style.display = 'none';
 
   // Fetch detailed season and episode data only if it's a TV show
-  fetch(`/api/tv/${item.id}/seasons`)
-      .then(response => {
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          return response.json();
-      })
-      .then(data => {
-          console.log('Seasons details:', data); // Debugging log
+fetch(`/api/tv/${item.id}/seasons`)
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log('Seasons details:', data); // Debugging log
 
-          const seasonDropdown = document.getElementById('season-dropdown');
-          const episodesContainer = document.getElementById('episodes-container');
+    const seasonDropdown = document.getElementById('season-buttons-container');
+    const episodesContainer = document.getElementById('episodes-container');
+    const mainDropdownButton = document.getElementById('season-dropdown'); // Reference to the main dropdown button
 
-          // Clear previous dropdown options and episodes content
-          seasonDropdown.innerHTML = '';
-          episodesContainer.innerHTML = '';
+    // Clear previous season buttons and episodes content
+    seasonDropdown.innerHTML = '';
+    episodesContainer.innerHTML = '';
 
-          if (data && data.length > 0) {
-              // ✅ Filter out seasons with no available episodes
-              const filteredSeasons = data.filter(season => 
-                  season.episodes.some(episode => 
-                      episodeIds.has(`${tvId}_${season.season_number}x${episode.episode_number}`)
-                  )
-              );
+    if (data && data.length > 0) {
+        // ✅ Filter out seasons with no available episodes
+        const filteredSeasons = data.filter(season =>
+            season.episodes.some(episode =>
+                episodeIds.has(`${tvId}_${season.season_number}x${episode.episode_number}`)
+            )
+        );
 
-              if (filteredSeasons.length === 0) {
-                  episodesContainer.innerHTML = '<p>No available seasons</p>';
-                  return;
-              }
+        if (filteredSeasons.length === 0) {
+            episodesContainer.innerHTML = '<p>No available seasons</p>';
+            return;
+        }
 
-              // ✅ Store seasons globally
-              window.allSeasons = filteredSeasons;
+        // ✅ Store seasons globally
+        window.allSeasons = filteredSeasons;
 
-              // ✅ Store total episode counts per season
-              window.seasonEpisodesCount = {};
-              filteredSeasons.forEach(season => {
-                  window.seasonEpisodesCount[season.season_number] = season.episodes.length;
-              });
+        // ✅ Store total episode counts per season
+        window.seasonEpisodesCount = {};
+        filteredSeasons.forEach(season => {
+            window.seasonEpisodesCount[season.season_number] = season.episodes.length;
+        });
 
-              console.log("✅ Loaded allSeasons globally:", window.allSeasons);
-              console.log("✅ Loaded seasonEpisodesCount:", window.seasonEpisodesCount);
+        console.log("✅ Loaded allSeasons globally:", window.allSeasons);
+        console.log("✅ Loaded seasonEpisodesCount:", window.seasonEpisodesCount);
 
-              // ✅ Populate dropdown with filtered seasons
-              filteredSeasons.forEach(season => {
-                  const option = document.createElement('option');
-                  option.value = season.season_number;
-                  option.textContent = `Season ${season.season_number}`;
-                  seasonDropdown.appendChild(option);
-              });
+        // ✅ Populate with buttons instead of <option>
+        filteredSeasons.forEach(season => {
+            const button = document.createElement('button');
+            button.textContent = `Season ${season.season_number}`;
+            button.classList.add('season-button'); // Optional for styling
+            button.dataset.seasonNumber = season.season_number;
+            seasonDropdown.appendChild(button);
 
-              // ✅ Set dropdown change handler using .onchange (replacing any previous handler)
-              seasonDropdown.onchange = (event) => {
-                  const selectedSeason = event.target.value;
-                  if (selectedSeason) {
-                      const selectedSeasonNumber = parseInt(selectedSeason, 10);
-                      // Find selected season data using numeric comparison
-                      const seasonData = filteredSeasons.find(season => parseInt(season.season_number, 10) === selectedSeasonNumber);
-                      if (seasonData) {
-                          displaySeasonEpisodes(tvId, seasonData);
-                      } else {
-                          console.error('Season data not found for season number:', selectedSeason);
-                      }
-                  } else {
-                      episodesContainer.innerHTML = ''; // Clear episodes if no season is selected
-                  }
-              };
+            button.onclick = () => {
+                const selectedSeasonNumber = parseInt(button.dataset.seasonNumber, 10);
+                const seasonData = filteredSeasons.find(season => parseInt(season.season_number, 10) === selectedSeasonNumber);
+                if (seasonData) {
+                    // Update the main dropdown button text with the selected season
+                    mainDropdownButton.textContent = `Season ${selectedSeasonNumber}`;
 
-              // ✅ Auto-select the first valid season
-              seasonDropdown.value = filteredSeasons[0].season_number;
-              displaySeasonEpisodes(tvId, filteredSeasons[0]);
-          } else {
-              episodesContainer.innerHTML = '<p>No seasons available</p>';
-          }
-      })
-      .catch(error => {
-          console.error('Error fetching seasons data:', error);
-          episodesContainer.innerHTML = '<p>Error fetching seasons data</p>';
-      });
- }  else {
+                    displaySeasonEpisodes(tvId, seasonData);
+                    highlightSelectedButton(button); // ✅ Optional: Highlight active
+                    
+                    // Close the dropdown after selecting a season
+                    seasonDropdown.style.display = 'none';
+                    const arrow = document.querySelector(".arrow");
+                    arrow.classList.remove('flipped'); // Unflip the arrow
+                } else {
+                    console.error('Season data not found for season number:', selectedSeasonNumber);
+                }
+            };
+        });
+
+        // ✅ Auto-click the first button (like auto-selecting first season)
+        const firstButton = seasonDropdown.querySelector('button');
+        if (firstButton) {
+            firstButton.click(); // Trigger click to load first season automatically
+        }
+    } else {
+        episodesContainer.innerHTML = '<p>No seasons available</p>';
+    }
+})
+.catch(error => {
+    console.error('Error fetching seasons data:', error);
+    episodesContainer.innerHTML = '<p>Error fetching seasons data</p>';
+});
+
+} else {
   
   seasonDropdown.style.display = 'none'; // Ensure dropdown is hidden
   episodesContainer.style.display = 'none'; // Ensure episodes container is hidden
@@ -2772,17 +2783,39 @@ function formatDuration(minutes) {
 
 document.addEventListener("DOMContentLoaded", function() {
   const seasonDropdown = document.getElementById("season-dropdown");
+  const seasonButtonsContainer = document.getElementById('season-buttons-container');
   const arrow = document.querySelector(".arrow");
 
-  seasonDropdown.addEventListener("click", function() {
-      arrow.classList.toggle("flipped"); // Toggle the flipped class on click
+  // Toggle showing/hiding the season buttons when clicking the dropdown
+  seasonDropdown.addEventListener('click', () => {
+    if (seasonButtonsContainer.style.display === 'none' || seasonButtonsContainer.style.display === '') {
+      seasonButtonsContainer.style.display = 'block';
+      arrow.classList.add('flipped'); // Flip the arrow
+    } else {
+      seasonButtonsContainer.style.display = 'none';
+      arrow.classList.remove('flipped'); // Unflip the arrow
+    }
   });
 
   // Optional: If you want the arrow to revert back when an option is selected
-  seasonDropdown.addEventListener("change", function() {
-      arrow.classList.remove("flipped"); // Remove the flipped class on selection
+  seasonButtonsContainer.addEventListener('click', (event) => {
+    if (event.target && event.target.matches("button")) { // Make sure a season button was clicked
+      // Close the season dropdown and reset the arrow
+      seasonButtonsContainer.style.display = 'none';
+      arrow.classList.remove('flipped');
+    }
   });
 });
+
+
+function highlightSelectedButton(selectedButton) {
+  const buttons = document.querySelectorAll('#season-dropdown .season-button');
+  buttons.forEach(button => {
+      button.classList.remove('active');
+  });
+  selectedButton.classList.add('active');
+}
+
 
 
 //////////////////////////////////////////////////////////// arabic series  /////////////////////////////////////////////////////////////////////////////
