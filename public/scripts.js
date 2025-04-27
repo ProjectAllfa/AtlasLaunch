@@ -2265,6 +2265,16 @@ function playVideo(videoUrl) {
      trailerDiv.innerHTML = `<div class="poster-placeholder" style="background-image: url('${backdropUrl}');"></div>`;
  }
 
+ // ✅ NEW: Refocus the play button after closing
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      const moviePlayButton = document.getElementById('play-button');
+      if (moviePlayButton && moviePlayButton.style.display !== 'none') {
+        moviePlayButton.focus();
+      }
+    }, 50); // Small delay to let DOM settle
+  });
+
     });
 
     // Append the close button to the overlay
