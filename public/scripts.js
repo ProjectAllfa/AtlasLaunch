@@ -2530,6 +2530,17 @@ function openVideoPlayer(videoUrl, tvId, seasonNumber, episodeNumber) {
           if (backdropUrl) {
               trailerDiv.innerHTML = `<div class="poster-placeholder" style="background-image: url('${backdropUrl}');"></div>`;
           }
+
+               // ✅ Refocus the series play button after closing
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const seriesPlayButton = document.getElementById('series-play-button');
+          if (seriesPlayButton && seriesPlayButton.style.display !== 'none') {
+            seriesPlayButton.focus();
+          }
+        }, 10); // Small delay to let DOM settle
+      });
+
       });
 
       fullscreenOverlay.appendChild(closeButton);
