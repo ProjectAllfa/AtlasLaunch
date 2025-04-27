@@ -2792,6 +2792,12 @@ document.addEventListener("DOMContentLoaded", function() {
     if (seasonButtonsContainer.style.display === 'none' || seasonButtonsContainer.style.display === '') {
       seasonButtonsContainer.style.display = 'block';
       arrow.classList.add('flipped'); // Flip the arrow
+
+      // Autofocus the first season button when the dropdown opens
+      const firstButton = seasonButtonsContainer.querySelector('button');
+      if (firstButton) {
+        firstButton.focus(); // Focus the first season button
+      }
     } else {
       seasonButtonsContainer.style.display = 'none';
       arrow.classList.remove('flipped'); // Unflip the arrow
@@ -2814,6 +2820,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
+
 
 function highlightSelectedButton(selectedButton) {
   const buttons = document.querySelectorAll('#season-dropdown .season-button');
