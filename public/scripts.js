@@ -2819,6 +2819,41 @@ document.addEventListener("DOMContentLoaded", function() {
       arrow.classList.remove('flipped'); // Reset the arrow
     }
   });
+
+  // Prevent navigation outside the dropdown with arrow keys (up, down, left, right)
+  seasonButtonsContainer.addEventListener('keydown', (event) => {
+    const buttons = Array.from(seasonButtonsContainer.querySelectorAll('button'));
+    const firstButton = buttons[0];
+    const lastButton = buttons[buttons.length - 1];
+
+    // Prevent the arrow key navigation from leaving the season buttons container
+    if (event.key === 'ArrowDown') {
+      // Move focus to the next button
+      const currentButton = document.activeElement;
+      let nextButton = currentButton.nextElementSibling;
+      if (nextButton) {
+        nextButton.focus();
+      } else {
+        firstButton.focus(); // Loop back to the first button
+      }
+      event.preventDefault(); // Prevent default action
+    } 
+    else if (event.key === 'ArrowUp') {
+      // Move focus to the previous button
+      const currentButton = document.activeElement;
+      let prevButton = currentButton.previousElementSibling;
+      if (prevButton) {
+        prevButton.focus();
+      } else {
+        lastButton.focus(); // Loop back to the last button
+      }
+      event.preventDefault(); // Prevent default action
+    }
+    // Optional: You can also block left/right arrow keys if they interfere with navigation
+    else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault();
+    }
+  });
 });
 
 
