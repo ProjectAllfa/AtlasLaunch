@@ -2096,13 +2096,9 @@ if (mediaType === 'tv') {
                   }
               };
 
-                // Auto-select and autofocus the first valid season
-            seasonDropdown.value = filteredSeasons[0].season_number;
-
-            // Autofocus the first option when the dropdown opens
-            seasonDropdown.focus();
-            seasonDropdown.options[0].selected = true;
-            displaySeasonEpisodes(tvId, filteredSeasons[0]);
+               // ✅ Auto-select the first valid season
+              seasonDropdown.value = filteredSeasons[0].season_number;
+              displaySeasonEpisodes(tvId, filteredSeasons[0]);
           } else {
               episodesContainer.innerHTML = '<p>No seasons available</p>';
           }
