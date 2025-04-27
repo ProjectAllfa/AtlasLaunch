@@ -1785,8 +1785,6 @@ fetch('/api/documentary')
       }
 
 
-      document.body.classList.add('modal-open');
-
       // ✅ Disable scrolling when modal is open
       document.body.style.overflow = "hidden";
 
@@ -2692,7 +2690,7 @@ document.body.appendChild(fullscreenOverlay);
       }
       
       // ✅ Re-enable scrolling when the modal is closed
-      document.body.classList.remove('modal-open');
+      document.body.style.overflow = "auto";
 
   });
 
