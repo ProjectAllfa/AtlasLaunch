@@ -1801,12 +1801,24 @@ if (mediaType === 'movie') {
     lastWatchedText.style.opacity = "0"; // ✅ Hide last watched for movies
     moviePlayButton.style.display = "flex";  // ✅ Show movie play button
     seriesPlayButton.style.display = "none"; // ❌ Hide series play button
+
+    // 🛑 INSERT focus code here for MOVIES
+    if (moviePlayButton) {
+      moviePlayButton.focus();
+  }
+
 } else if (mediaType === 'tv') {
     lastWatchedText.style.opacity = "1"; // ✅ Ensure it's visible again for series
     console.log(`📌 Fetching last watched for TV ID: ${item.id}`);
     
     moviePlayButton.style.display = "none";  // ❌ Hide movie play button
     seriesPlayButton.style.display = "flex"; // ✅ Show series play button
+
+      // 🛑 INSERT focus code here for SERIES
+      if (seriesPlayButton) {
+        seriesPlayButton.focus();
+    }
+
 
     // ✅ Fetch last watched episode for this series
     fetchLastWatchedEpisode(item.id).then(lastWatched => {
