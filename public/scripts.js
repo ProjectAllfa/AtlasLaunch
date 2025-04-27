@@ -2809,6 +2809,15 @@ document.addEventListener("DOMContentLoaded", function() {
     if (event.target && event.target.matches("button")) { // Make sure a season button was clicked
       seasonButtonsContainer.style.display = 'none';
       arrow.classList.remove('flipped'); // Reset the arrow
+      
+       // ✅ Focus the first episode after a season button is clicked
+    setTimeout(() => {
+      const firstEpisodeItem = document.querySelector('.episode-item');
+      if (firstEpisodeItem) {
+        firstEpisodeItem.setAttribute('tabindex', '-1'); // Make it focusable
+        firstEpisodeItem.focus();
+       }
+      }, 50); // Small delay to ensure episodes are rendered first
     }
   });
 
