@@ -2096,7 +2096,7 @@ if (mediaType === 'tv') {
                   }
               };
 
-               // ✅ Auto-select the first valid season
+              // ✅ Auto-select the first valid season
               seasonDropdown.value = filteredSeasons[0].season_number;
               displaySeasonEpisodes(tvId, filteredSeasons[0]);
           } else {
