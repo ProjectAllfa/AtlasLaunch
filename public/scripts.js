@@ -1787,6 +1787,9 @@ fetch('/api/documentary')
 
       document.body.classList.add('modal-open');
 
+      // ✅ Disable scrolling when modal is open
+      document.body.style.overflow = "hidden";
+
 // Determine if the item is a TV show or movie
 const mediaType = item.title ? 'movie' : 'tv';
 console.log(`📌 Opened Modal - TMDB ID: ${item.id} Type: ${mediaType}`);
