@@ -1796,16 +1796,17 @@ console.log(`📌 Opened Modal - TMDB ID: ${item.id} Type: ${mediaType}`);
 const moviePlayButton = document.getElementById('play-button');
 const seriesPlayButton = document.getElementById('series-play-button');
 
-// ✅ Toggle visibility of last watched text & play buttons
 if (mediaType === 'movie') {
     lastWatchedText.style.opacity = "0"; 
     moviePlayButton.style.display = "flex";  
     seriesPlayButton.style.display = "none"; 
 
     if (moviePlayButton) {
-        setTimeout(() => {
-            moviePlayButton.focus();
-        }, 2000); // ⏳ Delay 2 seconds
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                moviePlayButton.focus();
+            }, 50); // ⚡️ Just a tiny 50ms wait after rendering
+        });
     }
 
 } else if (mediaType === 'tv') {
@@ -1816,12 +1817,12 @@ if (mediaType === 'movie') {
     seriesPlayButton.style.display = "flex"; 
 
     if (seriesPlayButton) {
-        setTimeout(() => {
-            seriesPlayButton.focus();
-        }, 2000); // ⏳ Delay 2 seconds
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                seriesPlayButton.focus();
+            }, 50); // ⚡️ Just a tiny 50ms wait
+        });
     }
-
-
 
     // ✅ Fetch last watched episode for this series
     fetchLastWatchedEpisode(item.id).then(lastWatched => {
