@@ -71,10 +71,10 @@
 
   <span id="downloadapp-text" tabindex="-1" onclick="window.location.href='/download-app'">Download App</span>
 
- <!-- 🔔 Notifications Dropdown -->
+<!-- 🔔 Notifications Dropdown -->
 <div class="notifications-dropdown">
-  <div class="notifications-icon-container" onclick="toggleNotificationsMenu()">
-    <i id="notifications-bell" class="fa fa-bell" tabindex="-1"></i> <!-- Move tabindex here -->
+  <div class="notifications-icon-container" onclick="toggleNotificationsMenu()" tabindex="-1"> <!-- Move tabindex here -->
+    <i id="notifications-bell" class="fa fa-bell"></i> <!-- No need tabindex here anymore -->
     <div id="notifications-badge" class="badge" style="display: none;"></div>
   </div>
   <div id="notifications-menu" class="notifications-menu">
@@ -87,15 +87,16 @@
 
 <!-- ✅ Profile Dropdown -->
 <div class="profile-dropdown">
-  <div class="profile-icon-container" onclick="toggleProfileMenu()">
-    <img src="/images/avatar.png" alt="Profile" class="profile-icon" tabindex="-1"> <!-- Move tabindex here -->
-    <i id="profile-arrow" class="fa fa-caret-down" tabindex="-1"></i> <!-- Optional: caret icon focusable -->
+  <div class="profile-icon-container" onclick="toggleProfileMenu()" tabindex="-1"> <!-- Move tabindex here -->
+    <img src="/images/avatar.png" alt="Profile" class="profile-icon"> <!-- No need tabindex here anymore -->
+    <i id="profile-arrow" class="fa fa-caret-down"></i> <!-- No need tabindex here anymore -->
   </div>
   <div id="profile-menu" class="profile-menu">
     <span onclick="openProfileModal()">View Profile</span>
     <span onclick="logoutUser()">Log Out</span>
   </div>
 </div>
+
 
 <!-- 🔎 Search Container -->
 <div class="search-container">
