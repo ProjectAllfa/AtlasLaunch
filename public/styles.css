@@ -82,6 +82,13 @@
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  */
 
+.header-main-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* or space-between, depending on your design */
+}
+
+
 #mylist-text {
   color: white; /* Change this to your desired text color */
   font-size: 16px; /* Adjust font size if needed */
