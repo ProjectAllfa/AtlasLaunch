@@ -2621,8 +2621,8 @@ body.modal-open {
 
 .series-results .series-item {
   position: relative;
-  width: 280px;
-  height: 460px;
+  width: 15vw;
+  height: auto;
   background-color: #222;
   border-radius: 5px;
   overflow: hidden;
@@ -3222,8 +3222,8 @@ button[data-type="view-all"]:hover {
 
 #arabic-movies-results .movie-item { /* No changes here */
   position: relative;
-  width: 280px;
-  height: 460px;
+  width: 15vw;
+  height: auto;
   background-color: #222;
   border-radius: 5px;
   overflow: hidden;
