@@ -2089,8 +2089,8 @@ body.modal-open {
 /* Match Arabic Series Items with Movie Cards */
 .series-item {
   position: relative;
-  width: 280px !important;
-  height: 460px !important;
+  width: 15vw;
+  height: auto;
   margin-right: 10px;
   flex-shrink: 0;
   background-color: #222;
@@ -3172,17 +3172,26 @@ button[data-type="view-all"]:hover {
 }
 
 
-
-.arabic-movie-poster {
-  width: 280px !important; /* Increased width for larger movie cards */
-  height: 460px !important; /* Set height to ensure consistent size */
+/* Match Arabic Series Items with Movie Cards */
+.movie-item {
+   position: relative;
+  width: 15vw;
+  height: auto;
   margin-right: 10px;
   flex-shrink: 0;
   background-color: #222;
   border-radius: 5px;
   overflow: hidden;
   text-align: center;
-  transition: transform 0.3s ease; /* Smooth transition for scaling effect */
+  transition: transform 0.3s ease;
+}
+
+.movie-item img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block;
+  border-radius: 5px;
 }
 
 
@@ -3190,7 +3199,6 @@ button[data-type="view-all"]:hover {
 .arabic-movie-poster:hover {
   transform: scale(1.05); /* Scales the entire series card on hover */
 }
-
 
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////// */
