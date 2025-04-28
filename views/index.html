@@ -44,81 +44,71 @@
   <img src="/images/logo.png" alt="Logo" />
 </div>
 
-    <!-- Home Text -->
-    <span id="home-text" onclick="goHome()">Home</span>
+   
+   <!-- Home Text -->
+  <span id="home-text" onclick="goHome()">Home</span>
 
-    <!-- Movies Text -->
-<span id="movies-text" onclick="loadMoviesPage()">Movies</span>
+  <!-- Movies Text -->
+  <span id="movies-text" onclick="loadMoviesPage()">Movies</span>
 
-<!-- TV Shows Text -->
-<span id="tvshows-text" onclick="loadTVShowsPage()">TV Shows</span>
+  <!-- TV Shows Text -->
+  <span id="tvshows-text" onclick="loadTVShowsPage()">TV Shows</span>
 
-<!-- Arabic Movies Text -->
-<span id="arabicmovies-text">Arabic Movies</span>
+  <!-- Arabic Movies Text -->
+  <span id="arabicmovies-text">Arabic Movies</span>
 
-<!-- Arabic Shows Text -->
-<span id="arabicshows-text">Arabic Shows</span>
+  <!-- Arabic Shows Text -->
+  <span id="arabicshows-text">Arabic Shows</span>
 
-<!-- Turkish Shows Text -->
-<span id="turkishshows-text">Turkish Shows</span>
+  <!-- Turkish Shows Text -->
+  <span id="turkishshows-text">Turkish Shows</span>
 
-<!-- My List Button -->
-<span id="mylist-text" onclick="loadBothLists()">My List</span>
+  <!-- My List Button -->
+  <span id="mylist-text" onclick="loadBothLists()">My List</span>
 
-<span id="downloadapp-text" onclick="window.location.href='/download-app'">Download App</span>
+  <span id="downloadapp-text" onclick="window.location.href='/download-app'">Download App</span>
 
-<!-- 🔔 Notifications Dropdown -->
-<div class="notifications-dropdown">
-  <div class="notifications-icon-container" onclick="toggleNotificationsMenu()">
-    <i id="notifications-bell" class="fa fa-bell"></i>
-    <!-- Red Badge for Unread Notifications -->
-    <div id="notifications-badge" class="badge" style="display: none;"></div>
-  </div>
-
-  <!-- ✅ Dropdown Menu -->
-  <div id="notifications-menu" class="notifications-menu">
-    <h3>Notifications</h3>
-    <ul id="notifications-list">
-      <li>No new notifications</li> <!-- Placeholder -->
-    </ul>
-  </div>
-</div>
-
-
-
-
-
-<!-- ✅ Profile Dropdown -->
-<div class="profile-dropdown">
-  <div class="profile-icon-container" onclick="toggleProfileMenu()">
-   <img src="/images/avatar.png" alt="Profile" class="profile-icon">
-    <i id="profile-arrow" class="fa fa-caret-down"></i> <!-- Dropdown Arrow -->
-  </div>
-
-  <!-- ✅ Dropdown Menu -->
-  <div id="profile-menu" class="profile-menu">
-    <span onclick="openProfileModal()">View Profile</span>
-    <span onclick="logoutUser()">Log Out</span>
-  </div>
-</div>
-
-  
-    <!-- Search Container -->
-    <div class="search-container">
-      <!-- Search Icon Button -->
-      <button id="search-btn" aria-label="Search">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.3-4.3"></path>
-        </svg>
-      </button>
-  
-      <!-- Close Search Button -->
-      <button id="close-search">X</button>
-  
-      <!-- Search Input -->
-      <input type="text" id="search-bar" class="search-input" placeholder="Search..." style="display: none;">
+  <!-- 🔔 Notifications Dropdown -->
+  <div class="notifications-dropdown">
+    <div class="notifications-icon-container" onclick="toggleNotificationsMenu()">
+      <i id="notifications-bell" class="fa fa-bell"></i>
+      <div id="notifications-badge" class="badge" style="display: none;"></div>
     </div>
+    <div id="notifications-menu" class="notifications-menu">
+      <h3>Notifications</h3>
+      <ul id="notifications-list">
+        <li>No new notifications</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ✅ Profile Dropdown -->
+  <div class="profile-dropdown">
+    <div class="profile-icon-container" onclick="toggleProfileMenu()">
+      <img src="/images/avatar.png" alt="Profile" class="profile-icon">
+      <i id="profile-arrow" class="fa fa-caret-down"></i>
+    </div>
+    <div id="profile-menu" class="profile-menu">
+      <span onclick="openProfileModal()">View Profile</span>
+      <span onclick="logoutUser()">Log Out</span>
+    </div>
+  </div>
+
+  <!-- 🔎 Search Container -->
+  <div class="search-container">
+    <button id="search-btn" aria-label="Search">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.3-4.3"></path>
+      </svg>
+    </button>
+    <button id="close-search">X</button>
+    <input type="text" id="search-bar" class="search-input" placeholder="Search..." style="display: none;">
+  </div>
+
+</div> <!-- 🌟 Wrapped Content Ends Here -->
+
+     
   </header>
 
  <!-- Showing Results Header -->
