@@ -1,62 +1,61 @@
 
 //////////////////////////////////////////////////////////////// Remote Control Keys Navigation header/NavBar ///////////////////////////////////////////////////////////////
 
-// Get all the menu items you want to focus
-const menuItems = document.querySelectorAll("#home-text, #movies-text, #tvshows-text, #arabicmovies-text, #arabicshows-text, #turkishshows-text, #mylist-text, #downloadapp-text, #notifications-bell, #profile-icon-container");
+// Select all header focusable items
+const menuItems = document.querySelectorAll("#home-text, #movies-text, #tvshows-text, #arabicmovies-text, #arabicshows-text, #turkishshows-text, #mylist-text, #downloadapp-text, #notifications-bell, .profile-icon-container, #search-btn");
 
-// Get the logo element
+// Select the logo
 const logo = document.querySelector(".navbar-logo");
 
-// Flag to track if the header is active (logo focused)
-let headerFocused = false;
+// Track whether the header is active
+let headerActive = false;
 
-// Enable or disable focusable items based on header focus state
-function setFocusState(enable) {
+// Enable or disable menu items
+function setHeaderFocusState(enable) {
   menuItems.forEach(item => {
-    if (enable) {
-      item.setAttribute('tabindex', '0'); // Enable focusable
-    } else {
-      item.setAttribute('tabindex', '-1'); // Disable focusable
-    }
+    item.setAttribute('tabindex', enable ? '0' : '-1');
   });
 }
 
-// Listen for logo focus and blur events
+// When logo is focused
 logo.addEventListener('focus', () => {
-  headerFocused = true;
-  setFocusState(true);  // Enable focusable items when logo is focused
+  headerActive = true;
+  setHeaderFocusState(true);
 });
 
-logo.addEventListener('blur', () => {
-  headerFocused = false;
-  setFocusState(false); // Disable focusable items when logo loses focus
-});
-
-// Listen for keydown events to navigate using left/right keys
-document.addEventListener('keydown', function(e) {
-  if (!headerFocused) return; // Only allow if logo is focused
+// When anything is focused on the page
+document.addEventListener('focusin', (e) => {
+  const focusedElement = e.target;
   
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-    const focusedElement = document.activeElement;
-    
-    // If focus is on any of the menu items, allow navigation
-    if (menuItems.includes(focusedElement)) {
-      let nextElement;
-      
-      if (e.key === 'ArrowRight') {
-        nextElement = focusedElement.nextElementSibling || menuItems[0]; // Move right, or loop back to the first item
-      } else if (e.key === 'ArrowLeft') {
-        nextElement = focusedElement.previousElementSibling || menuItems[menuItems.length - 1]; // Move left, or loop back to the last item
-      }
-
-      nextElement.focus();  // Move focus to the next item
-      e.preventDefault(); // Prevent default arrow key behavior (scrolling)
-    }
+  // Check if the focused element is inside the header
+  const isInsideHeader = focusedElement.closest('.navbar-logo, .header-main-content');
+  
+  if (!isInsideHeader && headerActive) {
+    // User focused outside the header -> deactivate
+    headerActive = false;
+    setHeaderFocusState(false);
   }
 });
 
-// Disable focus on non-logo elements when the header is not active
-setFocusState(false);  // Initially disable all menu items
+// Handle left/right arrow key navigation
+document.addEventListener('keydown', (e) => {
+  if (!headerActive) return; // Only allow if header is active
+
+  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+    const focusable = Array.from(menuItems).filter(item => item.getAttribute('tabindex') === '0');
+    const currentIndex = focusable.indexOf(document.activeElement);
+
+    if (currentIndex !== -1) {
+      let nextIndex;
+      if (e.key === 'ArrowRight') {
+        nextIndex = (currentIndex + 1) % focusable.length; // Next item, loop back to start
+      } else if (e.key === 'ArrowLeft') {
+        nextIndex = (currentIndex - 1 + focusable.length) % focusable.length; // Previous item, loop back
+      }
+      focusable[nextIndex].focus();
+    }
+  }
+});
 
 
 //////////////////////////////////////////////////////////////// ADD TO HOME PROMPT MODAL ///////////////////////////////////////////////////////////////////////////////////
