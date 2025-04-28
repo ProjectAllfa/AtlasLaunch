@@ -72,20 +72,20 @@
   <span id="downloadapp-text" tabindex="-1" onclick="window.location.href='/download-app'">Download App</span>
 
 <!-- 🔔 Notifications Dropdown -->
-<div class="notifications-dropdown">
+<div class="notifications-dropdown" tabindex="-1"> <!-- Make entire dropdown non-focusable -->
   <div class="notifications-icon-container" onclick="toggleNotificationsMenu()" tabindex="-1">
-    <i id="notifications-bell" class="fa fa-bell"></i>
-    <div id="notifications-badge" class="badge" style="display: none;"></div>
+    <i id="notifications-bell" class="fa fa-bell" tabindex="-1"></i> <!-- Explicit tabindex -->
+    <div id="notifications-badge" class="badge" style="display: none;" tabindex="-1"></div> <!-- Explicit tabindex -->
   </div>
   
-  <!-- Add tabindex="-1" here too -->
   <div id="notifications-menu" class="notifications-menu" tabindex="-1">
-    <h3>Notifications</h3>
-    <ul id="notifications-list">
-      <li>No new notifications</li>
+    <h3 tabindex="-1">Notifications</h3> <!-- Explicit tabindex -->
+    <ul id="notifications-list" tabindex="-1">
+      <li tabindex="-1">No new notifications</li> <!-- Explicit tabindex -->
     </ul>
   </div>
 </div>
+
 
 
 <!-- ✅ Profile Dropdown -->
