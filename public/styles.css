@@ -335,8 +335,8 @@
 /* ✅ My List Movie Card */
 .mylist-card {
   position: relative;
-  width: 280px !important;
-  height: 460px !important;
+  width: 15vw;
+  height: auto;
   margin-right: 10px;
   flex-shrink: 0;
   background-color: #222;
