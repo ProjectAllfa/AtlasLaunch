@@ -71,43 +71,44 @@
 
   <span id="downloadapp-text" tabindex="-1" onclick="window.location.href='/download-app'">Download App</span>
 
-  <!-- 🔔 Notifications Dropdown -->
-  <div class="notifications-dropdown" tabindex="-1">
-    <div class="notifications-icon-container" onclick="toggleNotificationsMenu()">
-      <i id="notifications-bell" class="fa fa-bell"></i>
-      <div id="notifications-badge" class="badge" style="display: none;"></div>
-    </div>
-    <div id="notifications-menu" class="notifications-menu">
-      <h3>Notifications</h3>
-      <ul id="notifications-list">
-        <li>No new notifications</li>
-      </ul>
-    </div>
+ <!-- 🔔 Notifications Dropdown -->
+<div class="notifications-dropdown">
+  <div class="notifications-icon-container" onclick="toggleNotificationsMenu()">
+    <i id="notifications-bell" class="fa fa-bell" tabindex="-1"></i> <!-- Move tabindex here -->
+    <div id="notifications-badge" class="badge" style="display: none;"></div>
   </div>
+  <div id="notifications-menu" class="notifications-menu">
+    <h3>Notifications</h3>
+    <ul id="notifications-list">
+      <li>No new notifications</li>
+    </ul>
+  </div>
+</div>
 
-  <!-- ✅ Profile Dropdown -->
-  <div class="profile-dropdown" tabindex="-1">
-    <div class="profile-icon-container" onclick="toggleProfileMenu()">
-      <img src="/images/avatar.png" alt="Profile" class="profile-icon">
-      <i id="profile-arrow" class="fa fa-caret-down"></i>
-    </div>
-    <div id="profile-menu" class="profile-menu">
-      <span onclick="openProfileModal()">View Profile</span>
-      <span onclick="logoutUser()">Log Out</span>
-    </div>
+<!-- ✅ Profile Dropdown -->
+<div class="profile-dropdown">
+  <div class="profile-icon-container" onclick="toggleProfileMenu()">
+    <img src="/images/avatar.png" alt="Profile" class="profile-icon" tabindex="-1"> <!-- Move tabindex here -->
+    <i id="profile-arrow" class="fa fa-caret-down" tabindex="-1"></i> <!-- Optional: caret icon focusable -->
   </div>
+  <div id="profile-menu" class="profile-menu">
+    <span onclick="openProfileModal()">View Profile</span>
+    <span onclick="logoutUser()">Log Out</span>
+  </div>
+</div>
 
-  <!-- 🔎 Search Container -->
-  <div class="search-container" tabindex="-1">
-    <button id="search-btn" aria-label="Search">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-        <circle cx="11" cy="11" r="8"></circle>
-        <path d="m21 21-4.3-4.3"></path>
-      </svg>
-    </button>
-    <button id="close-search">X</button>
-    <input type="text" id="search-bar" class="search-input" placeholder="Search..." style="display: none;">
-  </div>
+<!-- 🔎 Search Container -->
+<div class="search-container">
+  <button id="search-btn" tabindex="-1" aria-label="Search">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+      <circle cx="11" cy="11" r="8"></circle>
+      <path d="m21 21-4.3-4.3"></path>
+    </svg>
+  </button>
+  <button id="close-search" tabindex="-1">X</button>
+  <input type="text" id="search-bar" class="search-input" placeholder="Search..." style="display: none;" tabindex="-1">
+</div>
+
 
 </div> <!-- 🌟 Wrapped Content Ends Here -->
 
