@@ -1,66 +1,6 @@
 
 //////////////////////////////////////////////////////////////// Remote Control Keys Navigation header/NavBar ///////////////////////////////////////////////////////////////
 
-// Get references to the navbar items and the logo
-const logo = document.getElementById("logo");
-const navbarItems = [
-  document.getElementById("home-text"),
-  document.getElementById("movies-text"),
-  document.getElementById("tvshows-text"),
-  document.getElementById("arabicmovies-text"),
-  document.getElementById("arabicshows-text"),
-  document.getElementById("turkishshows-text"),
-  document.getElementById("mylist-text"),
-  document.getElementById("downloadapp-text"),
-];
-
-// Listen for the "focus" event on the logo
-logo.addEventListener("focus", () => {
-  // Enable navigation by making the navbar items focusable
-  navbarItems.forEach(item => item.setAttribute("tabindex", "0"));
-  // Allow arrow keys navigation (left, right)
-  addArrowNavigation();
-});
-
-// Listen for the "blur" event when the logo is no longer focused
-logo.addEventListener("blur", () => {
-  // Disable navigation by removing focusability from navbar items
-  navbarItems.forEach(item => item.setAttribute("tabindex", "-1"));
-  // Remove arrow keys navigation (left, right)
-  removeArrowNavigation();
-});
-
-// Function to handle left/right arrow key navigation between navbar items
-function addArrowNavigation() {
-  document.addEventListener("keydown", handleArrowNavigation);
-}
-
-// Remove arrow navigation when logo loses focus
-function removeArrowNavigation() {
-  document.removeEventListener("keydown", handleArrowNavigation);
-}
-
-// Handle left/right arrow key navigation
-function handleArrowNavigation(event) {
-  const focusedElement = document.activeElement;
-  if (focusedElement && navbarItems.includes(focusedElement)) {
-    if (event.key === "ArrowRight") {
-      // Move to the next item
-      const nextItem = navbarItems[navbarItems.indexOf(focusedElement) + 1];
-      if (nextItem) {
-        nextItem.focus();
-      }
-    } else if (event.key === "ArrowLeft") {
-      // Move to the previous item
-      const prevItem = navbarItems[navbarItems.indexOf(focusedElement) - 1];
-      if (prevItem) {
-        prevItem.focus();
-      }
-    }
-  }
-}
-
-
 
 //////////////////////////////////////////////////////////////// ADD TO HOME PROMPT MODAL ///////////////////////////////////////////////////////////////////////////////////
 
