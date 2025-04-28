@@ -45,31 +45,34 @@
 </div>
 
    
-   <!-- Home Text -->
-  <span id="home-text" onclick="goHome()">Home</span>
+  <!-- 🌟 Wrapped Content Starts Here -->
+ <div class="header-main-content">
+
+  <!-- Home Text -->
+  <span id="home-text" tabindex="-1" onclick="goHome()">Home</span>
 
   <!-- Movies Text -->
-  <span id="movies-text" onclick="loadMoviesPage()">Movies</span>
+  <span id="movies-text" tabindex="-1" onclick="loadMoviesPage()">Movies</span>
 
   <!-- TV Shows Text -->
-  <span id="tvshows-text" onclick="loadTVShowsPage()">TV Shows</span>
+  <span id="tvshows-text" tabindex="-1" onclick="loadTVShowsPage()">TV Shows</span>
 
   <!-- Arabic Movies Text -->
-  <span id="arabicmovies-text">Arabic Movies</span>
+  <span id="arabicmovies-text" tabindex="-1">Arabic Movies</span>
 
   <!-- Arabic Shows Text -->
-  <span id="arabicshows-text">Arabic Shows</span>
+  <span id="arabicshows-text" tabindex="-1">Arabic Shows</span>
 
   <!-- Turkish Shows Text -->
-  <span id="turkishshows-text">Turkish Shows</span>
+  <span id="turkishshows-text" tabindex="-1">Turkish Shows</span>
 
   <!-- My List Button -->
-  <span id="mylist-text" onclick="loadBothLists()">My List</span>
+  <span id="mylist-text" tabindex="-1" onclick="loadBothLists()">My List</span>
 
-  <span id="downloadapp-text" onclick="window.location.href='/download-app'">Download App</span>
+  <span id="downloadapp-text" tabindex="-1" onclick="window.location.href='/download-app'">Download App</span>
 
   <!-- 🔔 Notifications Dropdown -->
-  <div class="notifications-dropdown">
+  <div class="notifications-dropdown" tabindex="-1">
     <div class="notifications-icon-container" onclick="toggleNotificationsMenu()">
       <i id="notifications-bell" class="fa fa-bell"></i>
       <div id="notifications-badge" class="badge" style="display: none;"></div>
@@ -83,7 +86,7 @@
   </div>
 
   <!-- ✅ Profile Dropdown -->
-  <div class="profile-dropdown">
+  <div class="profile-dropdown" tabindex="-1">
     <div class="profile-icon-container" onclick="toggleProfileMenu()">
       <img src="/images/avatar.png" alt="Profile" class="profile-icon">
       <i id="profile-arrow" class="fa fa-caret-down"></i>
@@ -95,7 +98,7 @@
   </div>
 
   <!-- 🔎 Search Container -->
-  <div class="search-container">
+  <div class="search-container" tabindex="-1">
     <button id="search-btn" aria-label="Search">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
         <circle cx="11" cy="11" r="8"></circle>
