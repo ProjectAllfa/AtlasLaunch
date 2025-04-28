@@ -1,6 +1,63 @@
 
 //////////////////////////////////////////////////////////////// Remote Control Keys Navigation header/NavBar ///////////////////////////////////////////////////////////////
 
+// Get all the menu items you want to focus
+const menuItems = document.querySelectorAll("#home-text, #movies-text, #tvshows-text, #arabicmovies-text, #arabicshows-text, #turkishshows-text, #mylist-text, #downloadapp-text, #notifications-bell, #profile-icon-container");
+
+// Get the logo element
+const logo = document.querySelector(".navbar-logo");
+
+// Flag to track if the header is active (logo focused)
+let headerFocused = false;
+
+// Enable or disable focusable items based on header focus state
+function setFocusState(enable) {
+  menuItems.forEach(item => {
+    if (enable) {
+      item.setAttribute('tabindex', '0'); // Enable focusable
+    } else {
+      item.setAttribute('tabindex', '-1'); // Disable focusable
+    }
+  });
+}
+
+// Listen for logo focus and blur events
+logo.addEventListener('focus', () => {
+  headerFocused = true;
+  setFocusState(true);  // Enable focusable items when logo is focused
+});
+
+logo.addEventListener('blur', () => {
+  headerFocused = false;
+  setFocusState(false); // Disable focusable items when logo loses focus
+});
+
+// Listen for keydown events to navigate using left/right keys
+document.addEventListener('keydown', function(e) {
+  if (!headerFocused) return; // Only allow if logo is focused
+  
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+    const focusedElement = document.activeElement;
+    
+    // If focus is on any of the menu items, allow navigation
+    if (menuItems.includes(focusedElement)) {
+      let nextElement;
+      
+      if (e.key === 'ArrowRight') {
+        nextElement = focusedElement.nextElementSibling || menuItems[0]; // Move right, or loop back to the first item
+      } else if (e.key === 'ArrowLeft') {
+        nextElement = focusedElement.previousElementSibling || menuItems[menuItems.length - 1]; // Move left, or loop back to the last item
+      }
+
+      nextElement.focus();  // Move focus to the next item
+      e.preventDefault(); // Prevent default arrow key behavior (scrolling)
+    }
+  }
+});
+
+// Disable focus on non-logo elements when the header is not active
+setFocusState(false);  // Initially disable all menu items
+
 
 //////////////////////////////////////////////////////////////// ADD TO HOME PROMPT MODAL ///////////////////////////////////////////////////////////////////////////////////
 
