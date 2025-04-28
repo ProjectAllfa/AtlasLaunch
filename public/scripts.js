@@ -37,23 +37,28 @@ document.addEventListener('focusin', (e) => {
   }
 });
 
-// Handle left/right arrow key navigation
+// Handle key navigation
 document.addEventListener('keydown', (e) => {
-  if (!headerActive) return; // Only allow if header is active
+  if (!headerActive) return;
 
   if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+    // Left or Right navigation
+    e.preventDefault(); // Prevent normal focus movement
     const focusable = Array.from(menuItems).filter(item => item.getAttribute('tabindex') === '0');
     const currentIndex = focusable.indexOf(document.activeElement);
 
     if (currentIndex !== -1) {
       let nextIndex;
       if (e.key === 'ArrowRight') {
-        nextIndex = (currentIndex + 1) % focusable.length; // Next item, loop back to start
+        nextIndex = (currentIndex + 1) % focusable.length;
       } else if (e.key === 'ArrowLeft') {
-        nextIndex = (currentIndex - 1 + focusable.length) % focusable.length; // Previous item, loop back
+        nextIndex = (currentIndex - 1 + focusable.length) % focusable.length;
       }
       focusable[nextIndex].focus();
     }
+  } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab') {
+    // Block Up, Down, and Tab if in header navigation
+    e.preventDefault();
   }
 });
 
