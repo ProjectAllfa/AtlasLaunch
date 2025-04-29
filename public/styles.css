@@ -122,20 +122,22 @@
   box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
 }
 
-.profile-dropdown:focus {
+
+.profile-icon-container:focus {
   outline: none !important;
   box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
 }
 
-.search-container:focus {
+#search-btn:focus {
   outline: none !important;
   box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
 }
 
-.notifications-dropdown:focus {
+.notifications-icon-container:focus {
   outline: none !important;
   box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
 }
+
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  */
 
