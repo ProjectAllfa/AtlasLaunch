@@ -666,9 +666,7 @@
 
 
 .view-more-btn:focus {
-  outline: none !important;         /* Disable native yellow outline */
   border: 2px solid #3498db !important;  /* Force your custom blue border */
-  box-shadow: none !important;      /* Remove any native glow or extra styles */
 }
 
 
