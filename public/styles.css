@@ -1564,6 +1564,11 @@ body.modal-open {
   position: relative; /* Add this to position the dropdown button relative to the container */
 }
 
+/* 🔵 Add this for focus state */
+#season-dropdown:focus {
+  border: 2px solid #3498db; /* Blue border */
+}
+
 #season-dropdown:hover {
   background-color: #444; /* Darker on hover */
 }
