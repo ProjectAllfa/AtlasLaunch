@@ -1584,7 +1584,7 @@ body.modal-open {
 
 /* 🔵 Add this for focus state */
 #season-dropdown:focus {
-  border: 2px solid #3498db; /* Blue border */
+  box-shadow: 0 0 0 2px #3498db !important; /* blue visual border */
 }
 
 #season-dropdown:hover {
