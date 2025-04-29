@@ -85,9 +85,21 @@
 .header-main-content {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* or space-between, depending on your design */
+  justify-content: space-between; /* or space-between, depending on your design */
+  width: 100%;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+ 
+}
 
 #mylist-text {
   color: white; /* Change this to your desired text color */
