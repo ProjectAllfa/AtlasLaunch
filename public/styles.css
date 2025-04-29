@@ -184,6 +184,11 @@
   box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
 }
 
+#series-play-button:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
 #favorite-button:focus {
   outline: none !important;
   box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
