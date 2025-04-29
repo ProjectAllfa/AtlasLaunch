@@ -78,6 +78,48 @@
   border-radius: 10px;
 }
 
+/* //////////////////////////////////////////////////////////////// Focus Styling for TV ///////////////////////////////////////////////////////////////////////////////////  */
+
+
+#home-text {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
+#movies-text {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
+#tvshows-text {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
+#arabicmovies-text {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
+#arabicshows-text {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
+#turkishshows-text {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
+#mylist-text {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
+#downloadapp-text {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
 
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  */
