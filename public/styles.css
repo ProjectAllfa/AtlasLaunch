@@ -194,11 +194,10 @@
   box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
 }
 
-.episode-item-content:focus {
-  outline: 0 0 0 2px #3498db !important; /* Blue border on focus */
+.episode-item:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
 }
-
-
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  */
 
