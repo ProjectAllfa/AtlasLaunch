@@ -1454,6 +1454,7 @@ header {
   overflow: hidden;
   text-align: center;
   transition: transform 0.3s ease; /* Smooth transition for scaling effect */
+  cursor: pointer;
 }
 
 /* 🔵 Add this for focus state */
@@ -1469,6 +1470,7 @@ header {
   object-fit: cover !important; /* Ensure the image covers the entire card without distortion */
   display: block;
   border-radius: 5px;
+  pointer-events: none;
 }
 
 
