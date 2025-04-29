@@ -1461,6 +1461,7 @@ header {
 .movie-card:focus {
   outline: none !important;
   box-shadow: 0 0 0 2px #3498db !important; /* blue visual border */
+  transform: scale(1.05);
 }
 
 .movie-card img {
