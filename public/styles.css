@@ -1447,6 +1447,11 @@ header {
   transition: transform 0.3s ease; /* Smooth transition for scaling effect */
 }
 
+/* 🔵 Add this for focus state */
+.movie-card:focus {
+  border: 2px solid #3498db; /* Blue border */
+}
+
 .movie-card img {
   width: 100% !important;
   height: 100% !important; /* Force image to fill the card */
