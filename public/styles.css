@@ -148,6 +148,16 @@
   box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
 }
 
+.left-btn:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
+.right-btn:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  */
 
