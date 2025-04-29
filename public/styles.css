@@ -169,6 +169,27 @@
 }
 
 
+.close-btn:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
+#mute-button:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
+#play-button:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
+#favorite-button:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
+
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  */
 
 .header-main-content {
