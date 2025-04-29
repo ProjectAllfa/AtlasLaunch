@@ -664,6 +664,11 @@
   transition: all 0.3s ease;
 }
 
+
+.view-more-btn:focus {
+  border: 2px solid #3498db; /* Blue border */
+}
+
 .view-more-btn:hover {
   color: #141414;
   border-color: #141414;
