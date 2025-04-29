@@ -1,19 +1,4 @@
 
-document.querySelectorAll('.movie-card').forEach(card => {
-  card.addEventListener('focus', (e) => {
-    // Find the parent .movie-row of the focused .movie-card
-    const movieRow = e.target.closest('.movie-row');
-    
-    // Scroll the .movie-row to center the focused card
-    movieRow.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',  // Ensure vertical centering if needed
-      inline: 'center'  // Center horizontally within the viewport
-    });
-  });
-});
-
-
 //////////////////////////////////////////////////////////////// Remote Control Keys Navigation header/NavBar ///////////////////////////////////////////////////////////////
 
 // Select all header focusable items
