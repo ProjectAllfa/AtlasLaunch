@@ -1,3 +1,8 @@
+.search-container, .notifications-dropdown, .profile-dropdown {
+  background: transparent; /* Ensure the div has a renderable background */
+  border: 1px solid transparent; /* Force a "box" for box-shadow to apply properly */
+}
+
 /* //////////////////////////////////////////////////////////////// ADD TO HOME PROMPT MODAL ///////////////////////////////////////////////////////////////////////////////////  */
 
 .cimaway-add-home-overlay {
