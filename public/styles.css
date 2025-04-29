@@ -1460,8 +1460,7 @@ header {
 /* 🔵 Add this for focus state */
 .movie-card:focus {
   outline: none !important;
-  border: 2px solid #3498db !important;
-  box-shadow: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* blue visual border */
 }
 
 .movie-card img {
