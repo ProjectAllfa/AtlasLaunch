@@ -45,8 +45,11 @@
 </div>
 
    
-  <!-- 🌟 Wrapped Content Starts Here -->
+ <!-- 🌟 Wrapped Content Starts Here -->
  <div class="header-main-content">
+
+  <!-- ✅ New wrapper for left-side menu -->
+  <div class="header-left">
 
   <!-- Home Text -->
   <span id="home-text" tabindex="-1" onclick="goHome()">Home</span>
@@ -71,6 +74,11 @@
 
   <span id="downloadapp-text" tabindex="-1" onclick="window.location.href='/download-app'">Download App</span>
 
+</div> <!-- ➡️ left Side wrapper end -->
+
+    <!-- ➡️ New Wrapper for Right Side Content -->
+    <div class="header-right">
+
 <!-- 🔔 Notifications Dropdown -->
 <div class="notifications-dropdown" tabindex="-1"> <!-- Make entire dropdown non-focusable -->
   <div class="notifications-icon-container" onclick="toggleNotificationsMenu()" tabindex="-1">
@@ -85,7 +93,6 @@
     </ul>
   </div>
 </div>
-
 
 
 <!-- ✅ Profile Dropdown -->
@@ -113,6 +120,8 @@
   <input type="text" id="search-bar" class="search-input" placeholder="Search..." style="display: none;" tabindex="-1">
 </div>
 
+
+ </div> <!-- ➡️ End of header-right -->
 
 </div> <!-- 🌟 Wrapped Content Ends Here -->
 
