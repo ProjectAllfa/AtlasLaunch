@@ -133,6 +133,11 @@
   box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
 }
 
+.notifications-dropdown:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
+}
+
 .notifications-icon-container:focus {
   outline: none !important;
   box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
