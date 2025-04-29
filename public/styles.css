@@ -194,7 +194,7 @@
   box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
 }
 
-.episode-item:focus {
+.episode-item-content:focus {
   outline: none !important;
   box-shadow: 0 0 0 2px #3498db !important; /* Blue border on focus */
 }
@@ -1955,10 +1955,6 @@ body.modal-open {
 
 /*/////////////////////// EP styling ///////////////////////////////////*/
 
-.episode-item {
- cursor: pointer;
-}
-
 /* Container for each episode */
 .episode-item-content {
   display: flex;
@@ -1966,6 +1962,7 @@ body.modal-open {
   padding: 10px 0;
   padding-left: 20px;
   border-bottom: 1px solid #ddd;
+  cursor: pointer;
 }
 
 /* Image container with fixed width */
