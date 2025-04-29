@@ -666,7 +666,7 @@
 
 
 .view-more-btn:focus {
-  border: 2px solid #3498db; /* Blue border */
+  border: 2px solid #3498db !important; /* Blue border */
 }
 
 .view-more-btn:hover {
