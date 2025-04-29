@@ -643,6 +643,7 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
   margin-bottom: 40px;
+  padding: 10px 0;
 }
 
 
