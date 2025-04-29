@@ -673,7 +673,7 @@
 
 
 
-.view-more-btn:hover {
+.view-more-btn:hover:not(:focus) {
   color: #141414;
   border-color: #141414;
   background-color: #747474;
