@@ -4530,6 +4530,10 @@ button[data-type="view-all"]:hover {
     opacity: 1;
     left: 50%
   }
+
+  #season-buttons-container {
+    margin-right: 10px;
+  }
 }
 
 /*/////////////////////////////////////////////////////// Media Query Arabic/Turkish Modal Content ////////////////////////////////////////////////////////////////*/
