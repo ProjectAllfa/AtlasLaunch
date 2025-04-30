@@ -3365,7 +3365,7 @@ button[data-type="view-all"]:hover {
 
 
 /* Hover Effect for Arabic Movies */
-.arabic-movie-poster:hover {
+movie-item:hover {
   transform: scale(1.05); /* Scales the entire series card on hover */
 }
 
