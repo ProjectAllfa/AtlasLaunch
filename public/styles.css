@@ -1,4 +1,30 @@
 
+
+
+.splash {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+dotlottie-player {
+  width: 30vw;
+  max-width: 300px;
+  min-width: 120px;
+  height: auto;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  dotlottie-player {
+    width: 20vw;
+  }
+}
+
+
 /* //////////////////////////////////////////////////////////////// ADD TO HOME PROMPT MODAL ///////////////////////////////////////////////////////////////////////////////////  */
 
 .cimaway-add-home-overlay {
