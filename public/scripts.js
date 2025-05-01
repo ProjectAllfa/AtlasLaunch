@@ -8,6 +8,12 @@ const isIphone = /iPhone/.test(navigator.userAgent) && !window.MSStream;
   const fromButton = urlParams.get('from') === 'button';
   console.log("Loaded from button:", fromButton);
 
+   // Clean the URL if loaded via ?from=button
+    if (fromButton && window.history.replaceState) {
+      const cleanURL = window.location.origin + window.location.pathname;
+      window.history.replaceState({}, document.title, cleanURL);
+    }
+
   const splash = document.querySelector('.splash');
 
   if (!isIphone || fromButton) {
