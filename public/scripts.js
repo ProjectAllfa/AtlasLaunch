@@ -1,4 +1,26 @@
 
+//////////////////////////////////////////////////////////////// hide/show animation based on device/iphone ///////////////////////////////////////////////////////////////
+
+const isIphone = /iPhone/.test(navigator.userAgent) && !window.MSStream;
+  console.log("Device detected:", isIphone ? "iPhone" : "Not iPhone");
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const fromButton = urlParams.get('from') === 'button';
+  console.log("Loaded from button:", fromButton);
+
+  const splash = document.querySelector('.splash');
+
+  if (!isIphone || fromButton) {
+    if (splash) splash.style.display = 'none';
+    console.log("Splash screen hidden immediately");
+  } else {
+    setTimeout(() => {
+      if (splash) splash.style.display = 'none';
+      console.log("Splash screen hidden after delay (iPhone only)");
+    }, 3000); // adjust delay if needed
+  }
+
+
 //////////////////////////////////////////////////////////////// Remote Control Keys Navigation header/NavBar ///////////////////////////////////////////////////////////////
 
 // Select all header focusable items
