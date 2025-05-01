@@ -150,7 +150,7 @@ window.addEventListener('scroll', function() {
 
 
 function goHome() {
-  window.location.href = '/'; // Replace 'index.html' with your home page URL
+  window.location.href = '/?from=button'; // Replace 'index.html' with your home page URL
 }
 
 
