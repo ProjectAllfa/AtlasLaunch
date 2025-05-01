@@ -11,19 +11,11 @@
   z-index: 9999;
 }
 
+
 dotlottie-player {
-  width: 30vw;
-  max-width: 300px;
-  min-width: 120px;
+  width: 40vw;
   height: auto;
 }
-
-@media (min-aspect-ratio: 16/9) {
-  dotlottie-player {
-    width: 20vw;
-  }
-}
-
 
 /* //////////////////////////////////////////////////////////////// ADD TO HOME PROMPT MODAL ///////////////////////////////////////////////////////////////////////////////////  */
 
