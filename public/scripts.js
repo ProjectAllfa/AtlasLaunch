@@ -2257,21 +2257,21 @@ if (mediaType === 'movie') {
 
 
 
-// Fetch Movies Function //
+
+// Fetch Movies Function using Vidjoy //
 function fetchMovieStream(movieId) {
-  // Send a request to your backend to get the video URL
-  fetch(`/api/movie/${movieId}/streams`)
+  // Send a request to your backend to get the Vidjoy video URL
+  fetch(`/api/vidjoy/movie/${movieId}/streams`)
       .then(response => response.json())
       .then(data => {
           console.log('Received data from server:', data); // Log the received data
 
           if (data && data.videoUrl) {
+              // Arabic subs cannot be appended directly to Vidjoy URLs like Vidsrc
+              // So we just play the raw URL (if subtitles are supported, it will auto-load)
 
-               // Append Arabic subtitle parameter
-            const videoUrlWithSubs = `${data.videoUrl}&ds_lang=ar`;
-            console.log(`Setting video source to: ${videoUrlWithSubs}`);
-
-              playVideo(videoUrlWithSubs); // Pass the video URL to play in the video player
+              console.log(`Setting video source to: ${data.videoUrl}`);
+              playVideo(data.videoUrl); // Pass the video URL to play in the video player
           } else {
               console.error('No video URL found for this movie.');
           }
@@ -2281,8 +2281,8 @@ function fetchMovieStream(movieId) {
       });
 }
 
-// Play Movie Function //
 
+// Play Movie Function //
 function playVideo(videoUrl) {
   try {
     // Check if the video URL is provided
@@ -2537,25 +2537,25 @@ function updateSeriesPlayButton(seriesId, season, episode) {
 
 
 
-// Function to fetch the episode stream URL and open the video player
+
+// Function to fetch the episode stream URL and open the video player using Vidjoy
 function fetchEpisodeStream(tvId, seasonNumber, episodeNumber) {
   if (!tvId || !seasonNumber || !episodeNumber) {
     console.error('Missing required parameters:', { tvId, seasonNumber, episodeNumber });
     return;
   }
 
-  console.log(`Fetching stream for TV Show: ${tvId}, Season: ${seasonNumber}, Episode: ${episodeNumber}`);
+  console.log(`Fetching Vidjoy stream for TV Show: ${tvId}, Season: ${seasonNumber}, Episode: ${episodeNumber}`);
 
-  fetch(`/api/tv/${tvId}/season/${seasonNumber}/episode/${episodeNumber}/streams`)
+  fetch(`/api/vidjoy/tv/${tvId}/season/${seasonNumber}/episode/${episodeNumber}/streams`)
     .then(response => response.json())
     .then(data => {
       if (data && data.videoUrl) {
-        // ✅ Append Arabic subtitle parameter and enable Auto-Next
-        const videoUrlWithSubs = `${data.videoUrl}&ds_lang=ar&autonext=1`;
-        console.log(`Setting video source to: ${videoUrlWithSubs}`);
+        // Vidjoy does not support appending subtitle or auto-next query params
+        console.log(`Setting video source to: ${data.videoUrl}`);
 
-        // ✅ Open video player after getting the URL
-        openVideoPlayer(videoUrlWithSubs, tvId, seasonNumber, episodeNumber);
+        // Open video player with raw Vidjoy URL
+        openVideoPlayer(data.videoUrl, tvId, seasonNumber, episodeNumber);
       } else {
         console.error("❌ No video URL found for this episode.");
       }
@@ -2564,6 +2564,7 @@ function fetchEpisodeStream(tvId, seasonNumber, episodeNumber) {
       console.error('Error fetching episode stream:', error);
     });
 }
+
 
 
 // Function to open the video player and play the fetched stream URL
