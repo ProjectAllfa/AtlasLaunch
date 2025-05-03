@@ -2258,27 +2258,27 @@ if (mediaType === 'movie') {
 
 
 
-// Fetch Movies Function using Vidjoy //
+// Fetch Movies Function using Vidjoy
 function fetchMovieStream(movieId) {
   // Send a request to your backend to get the Vidjoy video URL
   fetch(`/api/vidjoy/movie/${movieId}/streams`)
-      .then(response => response.json())
-      .then(data => {
-          console.log('Received data from server:', data); // Log the received data
+    .then(response => response.json())
+    .then(data => {
+      console.log('Received data from server:', data);
 
-          if (data && data.videoUrl) {
-              // Arabic subs cannot be appended directly to Vidjoy URLs like Vidsrc
-              // So we just play the raw URL (if subtitles are supported, it will auto-load)
+      if (data && data.videoUrl) {
+        // ✅ Append Vidjoy parameters with raw hex code (no %23)
+        const videoUrlWithParams = `${data.videoUrl}?adFree=true&DefaultIcons=true&autoplay=true&next=true&title=true&poster=true&primary=8e24aa`;
 
-              console.log(`Setting video source to: ${data.videoUrl}`);
-              playVideo(data.videoUrl); // Pass the video URL to play in the video player
-          } else {
-              console.error('No video URL found for this movie.');
-          }
-      })
-      .catch(error => {
-          console.error('Error fetching movie stream:', error);
-      });
+        console.log(`Setting video source to: ${videoUrlWithParams}`);
+        playVideo(videoUrlWithParams);
+      } else {
+        console.error('No video URL found for this movie.');
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching movie stream:', error);
+    });
 }
 
 
@@ -2551,11 +2551,11 @@ function fetchEpisodeStream(tvId, seasonNumber, episodeNumber) {
     .then(response => response.json())
     .then(data => {
       if (data && data.videoUrl) {
-        // Vidjoy does not support appending subtitle or auto-next query params
-        console.log(`Setting video source to: ${data.videoUrl}`);
+        // ✅ Correct color format (no encoding)
+        const videoUrlWithParams = `${data.videoUrl}?adFree=true&DefaultIcons=true&autoplay=true&next=true&title=true&poster=true&primary=8e24aa`;
+        console.log(`Setting video source to: ${videoUrlWithParams}`);
 
-        // Open video player with raw Vidjoy URL
-        openVideoPlayer(data.videoUrl, tvId, seasonNumber, episodeNumber);
+        openVideoPlayer(videoUrlWithParams, tvId, seasonNumber, episodeNumber);
       } else {
         console.error("❌ No video URL found for this episode.");
       }
