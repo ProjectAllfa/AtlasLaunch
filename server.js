@@ -3124,6 +3124,48 @@ app.get('/api/tmdb/:id', async (req, res) => {
   }
 });
 
+//////////////////////////////////////////////////////// Route for vidjoy API fetching video ///////////////////////////////////////////////////////////////////////////////////////////////
+
+// Vidjoy Movie Route //
+app.get('/api/vidjoy/movie/:id/streams', async (req, res) => {
+  const movieId = req.params.id;
+
+  if (!movieId) {
+    return res.status(400).json({ message: 'Movie ID is required' });
+  }
+
+  try {
+    const embedUrl = `https://vidjoy.wtf/embed/movie/${movieId}`;
+    console.log('Generated Vidjoy Movie Embed URL:', embedUrl);
+    res.json({ videoUrl: embedUrl });
+  } catch (error) {
+    console.error('Error generating Vidjoy movie stream URL:', error.message);
+    res.status(500).json({ message: 'Error generating stream URL', error: error.message });
+  }
+});
+
+
+// Vidjoy TV Show Route //
+app.get('/api/vidjoy/tv/:id/season/:season/episode/:episode/streams', async (req, res) => {
+  const { id, season, episode } = req.params;
+
+  if (!id || !season || !episode) {
+    return res.status(400).json({ message: 'TV Show ID, season, and episode are required' });
+  }
+
+  try {
+    const embedUrl = `https://vidjoy.wtf/embed/tv/${id}/${season}/${episode}`;
+    console.log('Generated Vidjoy TV Embed URL:', embedUrl);
+    res.json({ videoUrl: embedUrl });
+  } catch (error) {
+    console.error('Error generating Vidjoy TV stream URL:', error.message);
+    res.status(500).json({ message: 'Error generating stream URL', error: error.message });
+  }
+});
+
+
+
+
 
 //////////////////////////////////////////////////////// Route for vidsrc.me API fetching video ///////////////////////////////////////////////////////////////////////////////////////////////
 
